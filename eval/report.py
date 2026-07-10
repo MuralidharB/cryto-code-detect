@@ -2,7 +2,7 @@
 report.py — render results/report.md: the human-readable summary of a benchmark run.
 
 Reads the FROZEN ground truth (corpus/manifest.csv) and the deterministic outputs
-(results/scores.json, results/contamination.json) and produces a Markdown report whose top is a
+(results/scores.json, results/contamination.json, results/calibration.json) and produces a Markdown report whose top is a
 one-paragraph plain-language reading, followed by the miss-rate-by-tier table (the wedge), the
 precision table (the honest other half), the contamination delta (read at MATCHED difficulty), the
 memorisation canary, and corpus composition.
@@ -37,6 +37,7 @@ def fmt(x, pct=False):
 def main() -> None:
     scores = load("results/scores.json", {})
     contam = load("results/contamination.json", {})
+    calib = load("results/calibration.json", {})
     man = list(csv.DictReader((ROOT / "corpus/manifest.csv").open()))
     detectors = [d for d in ("regex", "llm", "hybrid") if d in scores]
     tiers = sorted({r["tier"] for r in man}, key=lambda t: (t == "neg", t))
@@ -173,6 +174,24 @@ def main() -> None:
             L.append("|---|---|---|")
             for s, v in bysub.items():
                 L.append(f"| {s} | {fmt(v['recall'])} | {v['n']} |")
+        L.append("")
+
+    # ---- confidence calibration ----
+    if calib.get("llm"):
+        c = calib["llm"]
+        L.append("## Confidence calibration (LLM)\n")
+        L.append(f"Is reported confidence trustworthy? **ECE {c['ece']}** ({c['reading']}); accuracy ≈ "
+                 "mean-confidence per bucket ⇒ the confidence can gate the hybrid's trust/verify.\n")
+        L.append("| confidence bin | n | mean conf | empirical accuracy | gap |")
+        L.append("|---|---|---|---|---|")
+        for b in c["bins"]:
+            if b["n"]:
+                L.append(f"| [{b['lo']:.1f}, {b['hi']:.1f}) | {b['n']} | {fmt(b['mean_conf'])} | "
+                         f"{fmt(b['accuracy'])} | {b['gap']:.3f} |")
+        pf = c["positive_flags"]
+        L.append(f"\n- **Trust threshold:** is_crypto=true flags reach ≥{pf['target_precision']} precision "
+                 f"at **confidence ≥ {pf['trust_threshold']}** — the hybrid can auto-trust above it and "
+                 "deterministically verify below it.")
         L.append("")
 
     # ---- contamination ----

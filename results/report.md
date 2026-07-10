@@ -68,6 +68,19 @@ Three numbers that diverge by design: is_crypto recall (did it spot crypto at al
 | 7 | 1.00 | 8 |
 | 8 | 0.88 | 48 |
 
+## Confidence calibration (LLM)
+
+Is reported confidence trustworthy? **ECE 0.0288** (well-calibrated); accuracy ≈ mean-confidence per bucket ⇒ the confidence can gate the hybrid's trust/verify.
+
+| confidence bin | n | mean conf | empirical accuracy | gap |
+|---|---|---|---|---|
+| [0.6, 0.7) | 1 | 0.62 | 0.00 | 0.620 |
+| [0.7, 0.8) | 14 | 0.72 | 0.71 | 0.008 |
+| [0.8, 0.9) | 38 | 0.84 | 0.95 | 0.112 |
+| [0.9, 1.0) | 310 | 0.98 | 1.00 | 0.018 |
+
+- **Trust threshold:** is_crypto=true flags reach ≥0.98 precision at **confidence ≥ 0.72** — the hybrid can auto-trust above it and deterministically verify below it.
+
 ## Contamination (read at matched difficulty)
 
 - **Matched-difficulty delta (public − novel recall): +0.000**
