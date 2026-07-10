@@ -114,11 +114,14 @@ def score(detector):
     by_tier, by_split, overall = defaultdict(list), defaultdict(list), []
     missing = []
     review = {"n": 0, "flagged": 0}  # crypto_adjacent_review (PRNGs): excluded from binary, reported apart
+    not_covered = 0  # detector gave NO verdict (is_crypto=null), e.g. Sonar unsupported-language/not-run
     for fp, row in man.items():
         ic = row["is_crypto"].strip().lower()
         f = fin.get(fp)
         if f is None:
             missing.append(fp); continue
+        if f.get("is_crypto") is None:  # no-verdict finding — do not score as a miss
+            not_covered += 1; continue
         pred = bool(f.get("is_crypto"))
         if ic == "review":  # not scored as crypto or non-crypto; only surfaced for review
             review["n"] += 1
@@ -135,6 +138,8 @@ def score(detector):
         "by_tier": {t: {**prf(v), "recall_ci95": bootstrap_recall(v)} for t, v in sorted(by_tier.items())},
         "by_split": {s: {**prf(v), "recall_ci95": bootstrap_recall(v)} for s, v in sorted(by_split.items())},
         "crypto_adjacent_review": {**review, "surfaced_rate": (review["flagged"] / review["n"]) if review["n"] else None},
+        "not_covered": not_covered,  # no-verdict findings (Sonar unsupported-language / not-run)
+        "coverage": round(len(overall) / (len(overall) + not_covered), 3) if (len(overall) + not_covered) else None,
         "files_missing_from_findings": missing,
     }
     t5 = tier5_metrics(man, fin)

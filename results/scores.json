@@ -21,7 +21,7 @@
         "n": 40,
         "recall_ci95": [
           0.7,
-          0.95
+          0.925
         ]
       },
       "1": {
@@ -47,7 +47,7 @@
         "n": 40,
         "recall_ci95": [
           0.125,
-          0.375
+          0.4
         ]
       },
       "3": {
@@ -136,7 +136,7 @@
         "f1": 0.4511278195488722,
         "n": 253,
         "recall_ci95": [
-          0.228,
+          0.233,
           0.354
         ]
       }
@@ -146,6 +146,8 @@
       "flagged": 0,
       "surfaced_rate": 0.0
     },
+    "not_covered": 0,
+    "coverage": 1.0,
     "files_missing_from_findings": [],
     "tier5": {
       "is_crypto_recall": 0.0,
@@ -285,7 +287,7 @@
         "f1": 0.9642857142857143,
         "n": 132,
         "recall_ci95": [
-          0.887,
+          0.896,
           0.983
         ]
       },
@@ -346,6 +348,8 @@
       "flagged": 13,
       "surfaced_rate": 0.9285714285714286
     },
+    "not_covered": 0,
+    "coverage": 1.0,
     "files_missing_from_findings": [],
     "tier5": {
       "is_crypto_recall": 0.9391304347826087,
@@ -536,7 +540,7 @@
         "f1": 0.9752475247524751,
         "n": 253,
         "recall_ci95": [
-          0.922,
+          0.927,
           0.981
         ]
       }
@@ -546,6 +550,8 @@
       "flagged": 13,
       "surfaced_rate": 0.9285714285714286
     },
+    "not_covered": 0,
+    "coverage": 1.0,
     "files_missing_from_findings": [],
     "tier5": {
       "is_crypto_recall": 0.9217391304347826,
@@ -596,6 +602,79 @@
         "n_groups": 12,
         "file_level_recall": 0.8541666666666666,
         "group_level_recall": 1.0
+      }
+    }
+  },
+  "sonar": {
+    "detector": "sonar",
+    "overall": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "n": 0
+    },
+    "by_tier": {},
+    "by_split": {},
+    "crypto_adjacent_review": {
+      "n": 0,
+      "flagged": 0,
+      "surfaced_rate": null
+    },
+    "not_covered": 377,
+    "coverage": 0.0,
+    "files_missing_from_findings": [],
+    "tier5": {
+      "is_crypto_recall": 0.0,
+      "n_positive": 115,
+      "family_accuracy": null,
+      "algorithm_accuracy_recognizable": null,
+      "n_recognizable": 0,
+      "by_subclass_recall": {
+        "1": {
+          "recall": 0.0,
+          "n": 8
+        },
+        "2": {
+          "recall": 0.0,
+          "n": 19
+        },
+        "3": {
+          "recall": 0.0,
+          "n": 13
+        },
+        "4": {
+          "recall": 0.0,
+          "n": 8
+        },
+        "5": {
+          "recall": 0.0,
+          "n": 4
+        },
+        "6": {
+          "recall": 0.0,
+          "n": 7
+        },
+        "7": {
+          "recall": 0.0,
+          "n": 8
+        },
+        "8": {
+          "recall": 0.0,
+          "n": 48
+        }
+      },
+      "decoys": {
+        "n": 13,
+        "false_positives": 0,
+        "precision_fp_rate": 0.0
+      },
+      "compose_groups": {
+        "n_groups": 12,
+        "file_level_recall": 0.0,
+        "group_level_recall": 0.0
       }
     }
   }
