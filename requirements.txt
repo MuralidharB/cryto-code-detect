@@ -1,0 +1,4 @@
+# crypto-discovery-bench runtime dependencies.
+# The corpus build (generate/) and the regex baseline + scoring (eval/) use only the Python stdlib.
+# Only the LLM detector and the memorisation canary need an API client:
+anthropic==0.113.0
