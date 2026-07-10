@@ -6,3 +6,4 @@ results/*
 !results/scores.json
 !results/contamination.json
 .claude/
+.sonar_work/
