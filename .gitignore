@@ -1,5 +1,7 @@
 .venv/
 __pycache__/
 *.pyc
-results/
+results/*
+!results/report.md
+!results/scores.json
 .claude/

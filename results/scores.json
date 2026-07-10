@@ -1,0 +1,602 @@
+{
+  "regex": {
+    "detector": "regex",
+    "overall": {
+      "tp": 79,
+      "fp": 0,
+      "fn": 237,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "n": 363
+    },
+    "by_tier": {
+      "0": {
+        "tp": 33,
+        "fp": 0,
+        "fn": 7,
+        "precision": 1.0,
+        "recall": 0.825,
+        "f1": 0.9041095890410958,
+        "n": 40,
+        "recall_ci95": [
+          0.7,
+          0.95
+        ]
+      },
+      "1": {
+        "tp": 31,
+        "fp": 0,
+        "fn": 9,
+        "precision": 1.0,
+        "recall": 0.775,
+        "f1": 0.8732394366197184,
+        "n": 40,
+        "recall_ci95": [
+          0.65,
+          0.9
+        ]
+      },
+      "2": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 30,
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4,
+        "n": 40,
+        "recall_ci95": [
+          0.125,
+          0.375
+        ]
+      },
+      "3": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 35,
+        "precision": 1.0,
+        "recall": 0.125,
+        "f1": 0.2222222222222222,
+        "n": 40,
+        "recall_ci95": [
+          0.025,
+          0.225
+        ]
+      },
+      "4": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 41,
+        "precision": null,
+        "recall": 0.0,
+        "f1": null,
+        "n": 41,
+        "recall_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "5": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 115,
+        "precision": null,
+        "recall": 0.0,
+        "f1": null,
+        "n": 132,
+        "recall_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "neg": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "n": 30,
+        "recall_ci95": null
+      }
+    },
+    "by_split": {
+      "novel": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 79,
+        "precision": 1.0,
+        "recall": 0.09195402298850575,
+        "f1": 0.16842105263157897,
+        "n": 87,
+        "recall_ci95": [
+          0.034,
+          0.161
+        ]
+      },
+      "public": {
+        "tp": 11,
+        "fp": 0,
+        "fn": 12,
+        "precision": 1.0,
+        "recall": 0.4782608695652174,
+        "f1": 0.6470588235294118,
+        "n": 23,
+        "recall_ci95": [
+          0.261,
+          0.696
+        ]
+      },
+      "synth": {
+        "tp": 60,
+        "fp": 0,
+        "fn": 146,
+        "precision": 1.0,
+        "recall": 0.2912621359223301,
+        "f1": 0.4511278195488722,
+        "n": 253,
+        "recall_ci95": [
+          0.228,
+          0.354
+        ]
+      }
+    },
+    "crypto_adjacent_review": {
+      "n": 14,
+      "flagged": 0,
+      "surfaced_rate": 0.0
+    },
+    "files_missing_from_findings": [],
+    "tier5": {
+      "is_crypto_recall": 0.0,
+      "n_positive": 115,
+      "family_accuracy": null,
+      "algorithm_accuracy_recognizable": null,
+      "n_recognizable": 0,
+      "by_subclass_recall": {
+        "1": {
+          "recall": 0.0,
+          "n": 8
+        },
+        "2": {
+          "recall": 0.0,
+          "n": 19
+        },
+        "3": {
+          "recall": 0.0,
+          "n": 13
+        },
+        "4": {
+          "recall": 0.0,
+          "n": 8
+        },
+        "5": {
+          "recall": 0.0,
+          "n": 4
+        },
+        "6": {
+          "recall": 0.0,
+          "n": 7
+        },
+        "7": {
+          "recall": 0.0,
+          "n": 8
+        },
+        "8": {
+          "recall": 0.0,
+          "n": 48
+        }
+      },
+      "decoys": {
+        "n": 13,
+        "false_positives": 0,
+        "precision_fp_rate": 0.0
+      },
+      "compose_groups": {
+        "n_groups": 12,
+        "file_level_recall": 0.0,
+        "group_level_recall": 0.0
+      }
+    }
+  },
+  "llm": {
+    "detector": "llm",
+    "overall": {
+      "tp": 309,
+      "fp": 1,
+      "fn": 7,
+      "precision": 0.9967741935483871,
+      "recall": 0.9778481012658228,
+      "f1": 0.9872204472843451,
+      "n": 363
+    },
+    "by_tier": {
+      "0": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "1": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "2": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "3": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "4": {
+        "tp": 41,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 41,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "5": {
+        "tp": 108,
+        "fp": 1,
+        "fn": 7,
+        "precision": 0.9908256880733946,
+        "recall": 0.9391304347826087,
+        "f1": 0.9642857142857143,
+        "n": 132,
+        "recall_ci95": [
+          0.887,
+          0.983
+        ]
+      },
+      "neg": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "n": 30,
+        "recall_ci95": null
+      }
+    },
+    "by_split": {
+      "novel": {
+        "tp": 87,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 87,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "public": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 23,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "synth": {
+        "tp": 199,
+        "fp": 1,
+        "fn": 7,
+        "precision": 0.995,
+        "recall": 0.9660194174757282,
+        "f1": 0.9802955665024631,
+        "n": 253,
+        "recall_ci95": [
+          0.937,
+          0.99
+        ]
+      }
+    },
+    "crypto_adjacent_review": {
+      "n": 14,
+      "flagged": 13,
+      "surfaced_rate": 0.9285714285714286
+    },
+    "files_missing_from_findings": [],
+    "tier5": {
+      "is_crypto_recall": 0.9391304347826087,
+      "n_positive": 115,
+      "family_accuracy": 0.9907407407407407,
+      "algorithm_accuracy_recognizable": 0.9,
+      "n_recognizable": 20,
+      "by_subclass_recall": {
+        "1": {
+          "recall": 1.0,
+          "n": 8
+        },
+        "2": {
+          "recall": 0.9473684210526315,
+          "n": 19
+        },
+        "3": {
+          "recall": 1.0,
+          "n": 13
+        },
+        "4": {
+          "recall": 1.0,
+          "n": 8
+        },
+        "5": {
+          "recall": 1.0,
+          "n": 4
+        },
+        "6": {
+          "recall": 1.0,
+          "n": 7
+        },
+        "7": {
+          "recall": 1.0,
+          "n": 8
+        },
+        "8": {
+          "recall": 0.875,
+          "n": 48
+        }
+      },
+      "decoys": {
+        "n": 13,
+        "false_positives": 1,
+        "precision_fp_rate": 0.07692307692307693
+      },
+      "compose_groups": {
+        "n_groups": 12,
+        "file_level_recall": 0.875,
+        "group_level_recall": 1.0
+      }
+    }
+  },
+  "hybrid": {
+    "detector": "hybrid",
+    "overall": {
+      "tp": 307,
+      "fp": 1,
+      "fn": 9,
+      "precision": 0.9967532467532467,
+      "recall": 0.9715189873417721,
+      "f1": 0.983974358974359,
+      "n": 363
+    },
+    "by_tier": {
+      "0": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "1": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "2": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "3": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "4": {
+        "tp": 41,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 41,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "5": {
+        "tp": 106,
+        "fp": 1,
+        "fn": 9,
+        "precision": 0.9906542056074766,
+        "recall": 0.9217391304347826,
+        "f1": 0.954954954954955,
+        "n": 132,
+        "recall_ci95": [
+          0.87,
+          0.965
+        ]
+      },
+      "neg": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "n": 30,
+        "recall_ci95": null
+      }
+    },
+    "by_split": {
+      "novel": {
+        "tp": 87,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 87,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "public": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 23,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "synth": {
+        "tp": 197,
+        "fp": 1,
+        "fn": 9,
+        "precision": 0.9949494949494949,
+        "recall": 0.9563106796116505,
+        "f1": 0.9752475247524751,
+        "n": 253,
+        "recall_ci95": [
+          0.922,
+          0.981
+        ]
+      }
+    },
+    "crypto_adjacent_review": {
+      "n": 14,
+      "flagged": 13,
+      "surfaced_rate": 0.9285714285714286
+    },
+    "files_missing_from_findings": [],
+    "tier5": {
+      "is_crypto_recall": 0.9217391304347826,
+      "n_positive": 115,
+      "family_accuracy": 0.9905660377358491,
+      "algorithm_accuracy_recognizable": 0.9,
+      "n_recognizable": 20,
+      "by_subclass_recall": {
+        "1": {
+          "recall": 1.0,
+          "n": 8
+        },
+        "2": {
+          "recall": 0.9473684210526315,
+          "n": 19
+        },
+        "3": {
+          "recall": 1.0,
+          "n": 13
+        },
+        "4": {
+          "recall": 1.0,
+          "n": 8
+        },
+        "5": {
+          "recall": 1.0,
+          "n": 4
+        },
+        "6": {
+          "recall": 0.8571428571428571,
+          "n": 7
+        },
+        "7": {
+          "recall": 1.0,
+          "n": 8
+        },
+        "8": {
+          "recall": 0.8541666666666666,
+          "n": 48
+        }
+      },
+      "decoys": {
+        "n": 13,
+        "false_positives": 1,
+        "precision_fp_rate": 0.07692307692307693
+      },
+      "compose_groups": {
+        "n_groups": 12,
+        "file_level_recall": 0.8541666666666666,
+        "group_level_recall": 1.0
+      }
+    }
+  }
+}
