@@ -1,0 +1,26 @@
+package gg
+
+const Block = 8
+
+func BuildTable(seed byte) [256]byte {
+	var table [256]byte
+	for i := 0; i < 256; i++ {
+		table[i] = byte(i)
+	}
+	acc := seed
+	if acc == 0 {
+		acc = 1
+	}
+	for i := 0; i < 256; i++ {
+		acc = acc*5 + 0x3D
+		j := acc ^ (acc >> 3)
+		table[i], table[j] = table[j], table[i]
+	}
+	return table
+}
+
+func ApplyTable(state []byte, table [256]byte) {
+	for i := range state {
+		state[i] = table[state[i]]
+	}
+}

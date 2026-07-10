@@ -1,0 +1,52 @@
+{
+  "recall_by_split": {
+    "public": {
+      "recall": 1.0,
+      "n": 23
+    },
+    "synth": {
+      "recall": 0.9875776397515528,
+      "n": 161
+    },
+    "novel": {
+      "recall": 1.0,
+      "n": 87
+    }
+  },
+  "contamination_delta_public_minus_novel_AGGREGATE": 0.0,
+  "aggregate_warning": "AGGREGATE delta conflates contamination with difficulty imbalance between splits; use the matched-difficulty delta below for any claim.",
+  "matched_difficulty_by_tier": {
+    "2": {
+      "public_recall": 1.0,
+      "n_public": 17,
+      "novel_recall": 1.0,
+      "n_novel": 23,
+      "delta": 0.0
+    }
+  },
+  "contamination_delta_matched_difficulty": 0.0,
+  "reading": "public and novel comparable at matched difficulty \u2014 low contamination",
+  "detector": "llm",
+  "memorisation_canary_overlap": {
+    "corpus/tier0_library_idiomatic/Md4Bouncy.java": 0.29,
+    "corpus/tier0_library_idiomatic/aes_gcm_examples.go": 0.01,
+    "corpus/tier0_library_idiomatic/md4_xcrypto.go": 0.671,
+    "corpus/tier0_library_idiomatic/sha1_hashlib.py": 0.105,
+    "corpus/tier0_library_idiomatic/sha1_openssl.c": 0.022,
+    "corpus/tier0_library_idiomatic/sha256_stdlib.go": 0.41,
+    "corpus/tier2_handrolled_textbook/RsaTextbook.java": 0.02,
+    "corpus/tier2_handrolled_textbook/Sha1Scratch.java": 0.099,
+    "corpus/tier2_handrolled_textbook/Sha256Scratch.java": 0.173,
+    "corpus/tier2_handrolled_textbook/aes_bcon.c": 0.03,
+    "corpus/tier2_handrolled_textbook/blowfish_bcon.c": 0.062,
+    "corpus/tier2_handrolled_textbook/des_bcon.c": 0.07,
+    "corpus/tier2_handrolled_textbook/md2_bcon.c": 0.247,
+    "corpus/tier2_handrolled_textbook/md4_scratch.c": 0.032,
+    "corpus/tier2_handrolled_textbook/md5_bcon.c": 0.23,
+    "corpus/tier2_handrolled_textbook/md5_scratch.go": 0.04,
+    "corpus/tier2_handrolled_textbook/md5_scratch.py": 0.229,
+    "corpus/tier2_handrolled_textbook/rc4_bcon.c": 0.594,
+    "corpus/tier2_handrolled_textbook/rsa_textbook.c": 0.008,
+    "corpus/tier2_handrolled_textbook/rsa_textbook.go": 0.034
+  }
+}

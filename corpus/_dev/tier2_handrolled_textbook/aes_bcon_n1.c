@@ -1,0 +1,949 @@
+
+
+#include <stdlib.h>
+#include <memory.h>
+#include "blk.h"
+
+#include <stdio.h>
+
+#define KE_ROTWORD(x) (((x) << 8) | ((x) >> 24))
+
+#define TRUE  1
+#define FALSE 0
+
+#define AES_128_ROUNDS 10
+#define AES_192_ROUNDS 0xc
+#define AES_256_ROUNDS 14
+
+void rnd9(BYTE counter[], const BYTE nonce[], int nonce_len, int payload_len_store_size);
+void r10(BYTE buf[], int assoc_len, int payload_len, int payload_len_store_size, int mac_len, const BYTE nonce[], int nonce_len);
+void w11(BYTE buf[], int *end_of_buf, const BYTE assoc[], int assoc_len);
+void v12(BYTE buf[], int *end_of_buf, const BYTE payload[], int payload_len);
+
+static const BYTE aes_sbox[0x10][0x10] = {
+	{99,0x7C,119,123,0xF2,0x6B,111,0xC5,0x30,1,103,43,254,0xD7,0xAB,118},
+	{202,0x82,201,125,250,89,71,240,0xAD,0xD4,0xA2,175,0x9C,0xA4,114,0xC0},
+	{0xB7,0xFD,147,38,54,0x3F,247,204,0x34,165,229,0xF1,0x71,0xD8,49,0x15},
+	{0x04,0xC7,35,0xC3,0x18,0x96,0x05,0x9A,7,0x12,128,0xE2,0xEB,39,178,0x75},
+	{9,0x83,0x2C,0x1A,27,0x6E,0x5A,160,0x52,0x3B,0xD6,179,41,227,47,132},
+	{83,209,0,0xED,0x20,252,177,91,106,0xCB,0xBE,57,74,0x4C,0x58,207},
+	{0xD0,0xEF,0xAA,251,67,0x4D,0x33,0x85,69,249,2,0x7F,80,60,159,0xA8},
+	{81,163,64,143,146,0x9D,0x38,245,0xBC,182,0xDA,33,16,0xFF,243,210},
+	{205,12,0x13,236,0x5F,0x97,0x44,23,196,167,0x7E,61,100,0x5D,0x19,0x73},
+	{96,129,79,220,34,0x2A,144,136,70,0xEE,184,20,222,0x5E,0x0B,219},
+	{0xE0,50,58,10,0x49,6,0x24,92,194,0xD3,0xAC,0x62,0x91,149,228,0x79},
+	{0xE7,0xC8,0x37,109,0x8D,0xD5,78,169,0x6C,86,244,0xEA,101,0x7A,0xAE,0x08},
+	{0xBA,0x78,0x25,46,0x1C,166,180,0xC6,0xE8,221,0x74,0x1F,75,0xBD,139,138},
+	{112,62,0xB5,102,72,0x03,0xF6,14,0x61,0x35,0x57,185,134,193,29,158},
+	{0xE1,0xF8,0x98,17,105,0xD9,0x8E,148,155,30,135,233,0xCE,85,0x28,223},
+	{140,0xA1,137,13,191,0xE6,66,0x68,65,153,45,0x0F,176,84,0xBB,22}
+};
+
+static const BYTE aes_invsbox[16][16] = {
+	{82,9,0x6A,0xD5,48,0x36,0xA5,0x38,191,0x40,163,158,0x81,0xF3,0xD7,251},
+	{0x7C,0xE3,0x39,130,155,47,255,0x87,0x34,142,67,68,0xC4,222,0xE9,0xCB},
+	{0x54,123,148,50,0xA6,194,0x23,61,0xEE,76,149,11,0x42,0xFA,0xC3,0x4E},
+	{8,0x2E,0xA1,102,0x28,0xD9,36,0xB2,118,91,0xA2,73,0x6D,139,209,37},
+	{0x72,0xF8,0xF6,0x64,134,104,152,22,0xD4,164,92,0xCC,93,0x65,182,0x92},
+	{0x6C,0x70,0x48,0x50,0xFD,237,0xB9,218,0x5E,21,70,0x57,0xA7,141,0x9D,0x84},
+	{144,0xD8,0xAB,0x00,140,0xBC,211,10,247,0xE4,88,0x05,184,179,0x45,0x06},
+	{0xD0,44,0x1E,143,0xCA,0x3F,0x0F,0x02,193,0xAF,189,3,1,19,0x8A,0x6B},
+	{0x3A,0x91,0x11,0x41,0x4F,0x67,0xDC,0xEA,151,242,207,206,240,180,0xE6,115},
+	{150,0xAC,116,0x22,231,173,53,0x85,0xE2,0xF9,55,232,0x1C,0x75,223,0x6E},
+	{0x47,241,0x1A,113,29,0x29,0xC5,0x89,111,0xB7,98,0x0E,0xAA,24,0xBE,27},
+	{0xFC,0x56,62,75,0xC6,210,0x79,32,154,219,0xC0,0xFE,0x78,205,90,0xF4},
+	{31,0xDD,168,51,136,7,199,0x31,0xB1,18,16,89,0x27,128,0xEC,0x5F},
+	{0x60,81,127,0xA9,0x19,181,74,0x0D,45,0xE5,0x7A,0x9F,0x93,0xC9,156,239},
+	{160,0xE0,0x3B,77,174,42,0xF5,0xB0,0xC8,0xEB,187,60,0x83,83,0x99,0x61},
+	{0x17,43,4,126,186,0x77,0xD6,38,0xE1,105,0x14,0x63,0x55,33,12,0x7D}
+};
+
+static const BYTE gf_mul[0x100][0x6] = {
+	{0,0,0,0x00,0,0x00},{2,0x03,0x09,11,13,14},
+	{0x04,0x06,0x12,22,26,28},{6,0x05,0x1b,29,0x17,18},
+	{8,12,36,0x2c,0x34,0x38},{0x0a,15,0x2d,39,57,0x36},
+	{0x0c,10,0x36,0x3a,46,36},{0x0e,9,63,0x31,35,42},
+	{16,0x18,0x48,0x58,104,0x70},{0x12,27,0x41,0x53,101,0x7e},
+	{0x14,0x1e,90,0x4e,114,108},{0x16,0x1d,83,69,127,98},
+	{0x18,20,108,116,92,0x48},{0x1a,0x17,0x65,0x7f,81,0x46},
+	{0x1c,18,126,0x62,0x46,84},{0x1e,17,119,0x69,0x4b,90},
+	{32,48,0x90,0xb0,208,0xe0},{34,51,153,187,0xdd,238},
+	{36,54,130,0xa6,202,252},{0x26,0x35,139,173,199,242},
+	{0x28,0x3c,0xb4,156,228,0xd8},{42,63,0xbd,151,233,0xd6},
+	{44,0x3a,0xa6,0x8a,0xfe,196},{46,0x39,0xaf,129,0xf3,202},
+	{0x30,0x28,216,0xe8,184,144},{0x32,43,209,227,0xb5,158},
+	{52,0x2e,0xca,254,162,140},{0x36,45,195,245,0xaf,0x82},
+	{56,36,252,0xc4,140,168},{0x3a,39,245,207,129,0xa6},
+	{60,34,0xee,0xd2,150,0xb4},{0x3e,0x21,231,0xd9,0x9b,186},
+	{64,0x60,0x3b,123,187,0xdb},{0x42,99,0x32,112,182,213},
+	{68,102,41,0x6d,161,199},{0x46,0x65,32,102,172,201},
+	{0x48,0x6c,31,87,143,0xe3},{74,0x6f,22,0x5c,0x82,0xed},
+	{0x4c,0x6a,0x0d,65,149,255},{0x4e,0x69,0x04,74,152,241},
+	{0x50,0x78,0x73,0x23,0xd3,0xab},{0x52,123,0x7a,40,222,165},
+	{84,126,97,0x35,0xc9,0xb7},{86,125,0x68,62,0xc4,0xb9},
+	{88,0x74,0x57,0x0f,231,0x93},{0x5a,119,0x5e,4,0xea,157},
+	{0x5c,0x72,0x45,25,253,143},{0x5e,0x71,76,0x12,0xf0,0x81},
+	{0x60,80,171,203,107,0x3b},{0x62,83,162,0xc0,0x66,0x35},
+	{0x64,0x56,0xb9,0xdd,113,39},{102,0x55,176,214,124,0x29},
+	{0x68,92,0x8f,231,0x5f,3},{106,95,0x86,236,0x52,13},
+	{0x6c,0x5a,157,0xf1,0x45,0x1f},{110,0x59,0x94,0xfa,72,17},
+	{112,0x48,0xe3,147,0x03,0x4b},{0x72,75,0xea,0x98,0x0e,0x45},
+	{0x74,78,241,133,0x19,0x57},{0x76,77,0xf8,0x8e,0x14,89},
+	{0x78,68,0xc7,191,55,0x73},{122,71,0xce,180,58,0x7d},
+	{0x7c,0x42,213,0xa9,45,111},{126,65,0xdc,0xa2,0x20,97},
+	{128,0xc0,0x76,0xf6,0x6d,173},{130,195,127,0xfd,96,163},
+	{132,0xc6,100,224,119,177},{134,197,0x6d,235,122,0xbf},
+	{0x88,204,0x52,218,89,0x95},{138,207,0x5b,209,0x54,155},
+	{140,0xca,0x40,204,67,137},{0x8e,0xc9,0x49,0xc7,78,0x87},
+	{144,216,62,0xae,5,221},{146,0xdb,55,165,8,211},
+	{148,0xde,0x2c,184,0x1f,0xc1},{150,0xdd,0x25,179,0x12,0xcf},
+	{152,212,26,0x82,49,0xe5},{154,0xd7,19,0x89,60,235},
+	{0x9c,0xd2,0x08,0x94,43,249},{0x9e,0xd1,0x01,0x9f,38,247},
+	{0xa0,0xf0,230,0x46,189,0x4d},{162,243,239,0x4d,0xb0,67},
+	{0xa4,0xf6,0xf4,80,167,81},{0xa6,245,0xfd,91,170,95},
+	{168,252,0xc2,106,137,117},{0xaa,255,0xcb,0x61,0x84,0x7b},
+	{172,0xfa,0xd0,0x7c,147,105},{174,0xf9,217,0x77,158,0x67},
+	{176,0xe8,0xae,30,213,61},{178,0xeb,167,21,216,51},
+	{180,238,0xbc,0x08,207,33},{182,0xed,0xb5,0x03,0xc2,47},
+	{0xb8,228,0x8a,50,0xe1,5},{186,0xe7,0x83,0x39,0xec,0x0b},
+	{0xbc,0xe2,0x98,0x24,251,0x19},{190,225,0x91,0x2f,0xf6,23},
+	{192,160,77,141,214,118},{194,0xa3,68,0x86,0xdb,120},
+	{196,0xa6,95,155,0xcc,106},{0xc6,0xa5,0x56,144,0xc1,0x64},
+	{0xc8,0xac,0x69,0xa1,226,78},{0xca,175,96,170,239,64},
+	{204,0xaa,123,0xb7,0xf8,0x52},{206,0xa9,0x72,188,0xf5,0x5c},
+	{0xd0,0xb8,0x05,213,0xbe,6},{210,187,12,222,179,8},
+	{0xd4,0xbe,0x17,0xc3,0xa4,26},{214,189,30,200,169,0x14},
+	{216,180,33,249,138,0x3e},{218,183,40,242,0x87,0x30},
+	{0xdc,178,51,239,0x90,34},{0xde,0xb1,0x3a,228,157,44},
+	{0xe0,0x90,0xdd,0x3d,0x06,0x96},{226,0x93,0xd4,54,11,152},
+	{0xe4,150,207,43,28,138},{230,0x95,0xc6,0x20,0x11,132},
+	{0xe8,156,249,0x11,0x32,174},{234,159,0xf0,0x1a,63,160},
+	{236,0x9a,0xeb,7,0x28,0xb2},{0xee,0x99,0xe2,0x0c,37,0xbc},
+	{240,136,0x95,0x65,0x6e,230},{242,139,0x9c,0x6e,0x63,232},
+	{0xf4,0x8e,135,115,116,0xfa},{246,0x8d,0x8e,0x78,121,0xf4},
+	{248,0x84,0xb1,73,0x5a,0xde},{250,0x87,184,0x42,0x57,208},
+	{0xfc,130,163,0x5f,64,194},{254,129,0xaa,84,0x4d,204},
+	{0x1b,155,236,0xf7,218,0x41},{25,152,0xe5,0xfc,215,79},
+	{31,157,0xfe,225,192,93},{0x1d,0x9e,0xf7,234,205,0x53},
+	{0x13,0x97,0xc8,219,238,0x79},{17,0x94,0xc1,0xd0,227,119},
+	{0x17,145,218,0xcd,244,101},{0x15,0x92,211,198,249,107},
+	{0x0b,131,0xa4,175,178,0x31},{9,128,0xad,164,191,63},
+	{15,0x85,0xb6,185,168,45},{13,134,191,0xb2,0xa5,35},
+	{0x03,0x8f,128,131,0x86,0x09},{1,0x8c,137,0x88,0x8b,0x07},
+	{7,0x89,146,149,156,0x15},{5,138,155,158,0x91,27},
+	{0x3b,0xab,124,0x47,0x0a,0xa1},{0x39,0xa8,0x75,0x4c,7,0xaf},
+	{63,0xad,110,81,0x10,0xbd},{0x3d,174,0x67,90,0x1d,179},
+	{51,167,0x58,107,0x3e,153},{0x31,0xa4,0x51,96,51,0x97},
+	{0x37,161,74,125,36,0x85},{0x35,162,0x43,0x76,41,139},
+	{43,179,52,0x1f,98,0xd1},{41,0xb0,61,20,0x6f,223},
+	{47,181,0x26,9,0x78,205},{45,182,47,2,0x75,0xc3},
+	{0x23,0xbf,16,0x33,86,233},{33,0xbc,0x19,0x38,0x5b,231},
+	{0x27,0xb9,2,0x25,0x4c,0xf5},{0x25,186,11,46,65,251},
+	{0x5b,251,215,140,97,0x9a},{89,0xf8,222,0x87,0x6c,148},
+	{0x5f,0xfd,0xc5,154,123,0x86},{93,254,204,145,0x76,0x88},
+	{0x53,0xf7,0xf3,160,85,0xa2},{0x51,0xf4,250,171,88,0xac},
+	{0x57,0xf1,0xe1,182,79,0xbe},{85,242,0xe8,0xbd,0x42,0xb0},
+	{75,0xe3,0x9f,0xd4,0x09,0xea},{73,224,150,223,0x04,0xe4},
+	{0x4f,0xe5,141,0xc2,19,246},{77,230,0x84,201,30,0xf8},
+	{67,0xef,187,248,61,0xd2},{0x41,236,0xb2,243,0x30,0xdc},
+	{0x47,233,169,238,0x27,0xce},{69,234,0xa0,229,0x2a,0xc0},
+	{123,0xcb,71,60,0xb1,0x7a},{0x79,200,78,0x37,0xbc,116},
+	{127,0xcd,85,0x2a,171,0x66},{125,206,0x5c,33,0xa6,0x68},
+	{115,0xc7,99,0x10,133,0x42},{113,0xc4,0x6a,27,0x88,0x4c},
+	{119,0xc1,113,0x06,0x9f,94},{0x75,194,120,13,0x92,80},
+	{107,0xd3,15,100,0xd9,10},{0x69,0xd0,6,0x6f,212,4},
+	{111,213,0x1d,0x72,0xc3,0x16},{109,0xd6,20,121,206,24},
+	{0x63,223,0x2b,72,237,50},{97,220,0x22,0x43,224,0x3c},
+	{103,0xd9,0x39,94,0xf7,46},{0x65,0xda,0x30,0x55,0xfa,32},
+	{0x9b,91,154,1,183,0xec},{0x99,0x58,0x93,10,0xba,0xe2},
+	{159,0x5d,0x88,0x17,0xad,0xf0},{0x9d,0x5e,0x81,28,160,0xfe},
+	{147,0x57,0xbe,45,0x83,212},{145,0x54,183,38,142,218},
+	{0x97,81,0xac,0x3b,0x99,0xc8},{0x95,0x52,0xa5,48,0x94,0xc6},
+	{0x8b,67,210,89,223,0x9c},{0x89,0x40,0xdb,82,0xd2,0x92},
+	{143,69,0xc0,0x4f,197,0x80},{141,0x46,0xc9,68,0xc8,142},
+	{131,79,0xf6,0x75,235,164},{129,0x4c,255,0x7e,0xe6,170},
+	{135,0x49,0xe4,99,0xf1,184},{0x85,74,0xed,0x68,0xfc,0xb6},
+	{0xbb,107,10,0xb1,0x67,12},{185,0x68,3,0xba,106,2},
+	{0xbf,109,24,167,0x7d,16},{0xbd,110,17,0xac,0x70,0x1e},
+	{179,103,46,157,0x53,0x34},{0xb1,0x64,39,0x96,0x5e,0x3a},
+	{0xb7,97,60,0x8b,73,40},{181,0x62,53,0x80,0x44,38},
+	{0xab,0x73,66,0xe9,0x0f,124},{169,0x70,75,0xe2,2,114},
+	{175,117,0x50,255,0x15,96},{173,118,0x59,0xf4,24,110},
+	{0xa3,0x7f,102,197,59,68},{161,124,0x6f,0xce,54,74},
+	{167,0x79,116,211,0x21,88},{165,0x7a,125,216,44,86},
+	{219,59,0xa1,0x7a,0x0c,0x37},{217,56,0xa8,0x71,1,0x39},
+	{223,0x3d,179,108,22,0x2b},{0xdd,0x3e,0xba,103,0x1b,0x25},
+	{211,55,133,86,56,0x0f},{0xd1,52,140,0x5d,0x35,0x01},
+	{215,0x31,0x97,0x40,34,0x13},{0xd5,0x32,158,75,47,0x1d},
+	{0xcb,35,0xe9,0x22,0x64,0x47},{201,32,224,0x29,0x69,0x49},
+	{0xcf,0x25,251,52,0x7e,91},{0xcd,0x26,0xf2,63,0x73,0x55},
+	{195,0x2f,205,14,80,127},{193,44,0xc4,5,0x5d,0x71},
+	{199,0x29,223,0x18,0x4a,99},{0xc5,42,0xd6,19,0x47,109},
+	{251,11,49,0xca,220,0xd7},{249,0x08,56,0xc1,209,0xd9},
+	{0xff,13,0x23,220,0xc6,0xcb},{253,14,0x2a,0xd7,0xcb,197},
+	{243,7,0x15,230,232,0xef},{0xf1,0x04,28,0xed,0xe5,225},
+	{247,0x01,7,0xf0,242,0xf3},{245,2,0x0e,251,255,253},
+	{0xeb,19,121,146,180,0xa7},{0xe9,0x10,112,0x99,0xb9,169},
+	{239,21,0x6b,132,0xae,0xbb},{0xed,0x16,98,0x8f,0xa3,0xb5},
+	{227,0x1f,0x5d,190,0x80,0x9f},{0xe1,28,0x54,181,0x8d,0x91},
+	{0xe7,25,79,168,0x9a,131},{229,26,0x46,163,151,0x8d}
+};
+
+void st0(const BYTE in[], BYTE out[], size_t len)
+{
+	size_t idx;
+
+	for (idx = 0; idx < len; idx++)
+		out[idx] ^= in[idx];
+}
+
+int tmp1(const BYTE in[], size_t in_len, BYTE out[], const WORD key[], int keysize, const BYTE iv[])
+{
+	BYTE buf_in[AES_BLOCK_SIZE], buf_out[AES_BLOCK_SIZE], iv_buf[AES_BLOCK_SIZE];
+	int blocks, idx;
+
+	if (in_len % AES_BLOCK_SIZE != 0)
+		return(FALSE);
+
+	blocks = in_len / AES_BLOCK_SIZE;
+
+	memcpy(iv_buf, iv, AES_BLOCK_SIZE);
+
+	for (idx = 0x0; idx < blocks; idx++) {
+		memcpy(buf_in, &in[idx * AES_BLOCK_SIZE], AES_BLOCK_SIZE);
+		st0(iv_buf, buf_in, AES_BLOCK_SIZE);
+		rnd23(buf_in, buf_out, key, keysize);
+		memcpy(&out[idx * AES_BLOCK_SIZE], buf_out, AES_BLOCK_SIZE);
+		memcpy(iv_buf, buf_out, AES_BLOCK_SIZE);
+	}
+
+	return(TRUE);
+}
+
+int acc2(const BYTE in[], size_t in_len, BYTE out[], const WORD key[], int keysize, const BYTE iv[])
+{
+	BYTE buf_in[AES_BLOCK_SIZE], buf_out[AES_BLOCK_SIZE], iv_buf[AES_BLOCK_SIZE];
+	int blocks, idx;
+
+	if (in_len % AES_BLOCK_SIZE != 0)
+		return(FALSE);
+
+	blocks = in_len / AES_BLOCK_SIZE;
+
+	memcpy(iv_buf, iv, AES_BLOCK_SIZE);
+
+	for (idx = 0; idx < blocks; idx++) {
+		memcpy(buf_in, &in[idx * AES_BLOCK_SIZE], AES_BLOCK_SIZE);
+		st0(iv_buf, buf_in, AES_BLOCK_SIZE);
+		rnd23(buf_in, buf_out, key, keysize);
+		memcpy(iv_buf, buf_out, AES_BLOCK_SIZE);
+		
+	}
+
+	memcpy(out, buf_out, AES_BLOCK_SIZE);   
+
+	return(TRUE);
+}
+
+int x3(const BYTE in[], size_t in_len, BYTE out[], const WORD key[], int keysize, const BYTE iv[])
+{
+	BYTE buf_in[AES_BLOCK_SIZE], buf_out[AES_BLOCK_SIZE], iv_buf[AES_BLOCK_SIZE];
+	int blocks, idx;
+
+	if (in_len % AES_BLOCK_SIZE != 0x0)
+		return(FALSE);
+
+	blocks = in_len / AES_BLOCK_SIZE;
+
+	memcpy(iv_buf, iv, AES_BLOCK_SIZE);
+
+	for (idx = 0; idx < blocks; idx++) {
+		memcpy(buf_in, &in[idx * AES_BLOCK_SIZE], AES_BLOCK_SIZE);
+		r24(buf_in, buf_out, key, keysize);
+		st0(iv_buf, buf_out, AES_BLOCK_SIZE);
+		memcpy(&out[idx * AES_BLOCK_SIZE], buf_out, AES_BLOCK_SIZE);
+		memcpy(iv_buf, buf_in, AES_BLOCK_SIZE);
+	}
+
+	return(TRUE);
+}
+
+void buf4(BYTE iv[], int counter_size)
+{
+	int idx;
+
+	for (idx = AES_BLOCK_SIZE - 0x1; idx >= AES_BLOCK_SIZE - counter_size; idx--) {
+		iv[idx]++;
+		if (iv[idx] != 0x0 || idx == AES_BLOCK_SIZE - counter_size)
+			break;
+	}
+}
+
+void h05(const BYTE in[], size_t in_len, BYTE out[], const WORD key[], int keysize, const BYTE iv[])
+{
+	size_t idx = 0, last_block_length;
+	BYTE iv_buf[AES_BLOCK_SIZE], out_buf[AES_BLOCK_SIZE];
+
+	if (in != out)
+		memcpy(out, in, in_len);
+
+	memcpy(iv_buf, iv, AES_BLOCK_SIZE);
+	last_block_length = in_len - AES_BLOCK_SIZE;
+
+	if (in_len > AES_BLOCK_SIZE) {
+		for (idx = 0x0; idx < last_block_length; idx += AES_BLOCK_SIZE) {
+			rnd23(iv_buf, out_buf, key, keysize);
+			st0(out_buf, &out[idx], AES_BLOCK_SIZE);
+			buf4(iv_buf, AES_BLOCK_SIZE);
+		}
+	}
+
+	rnd23(iv_buf, out_buf, key, keysize);
+	st0(out_buf, &out[idx], in_len - idx);   
+}
+
+void q6(const BYTE in[], size_t in_len, BYTE out[], const WORD key[], int keysize, const BYTE iv[])
+{
+	
+	h05(in, in_len, out, key, keysize, iv);
+}
+
+int kx7(const BYTE payload[], WORD payload_len, const BYTE assoc[], unsigned short assoc_len,
+                    const BYTE nonce[], unsigned short nonce_len, BYTE out[], WORD *out_len,
+                    WORD mac_len, const BYTE key_str[], int keysize)
+{
+	BYTE temp_iv[AES_BLOCK_SIZE], counter[AES_BLOCK_SIZE], mac[16], *buf;
+	int end_of_buf, payload_len_store_size;
+	WORD key[60];
+
+	if (mac_len != 4 && mac_len != 6 && mac_len != 8 && mac_len != 0xa &&
+	   mac_len != 0xc && mac_len != 14 && mac_len != 16)
+		return(FALSE);
+
+	if (nonce_len < 0x7 || nonce_len > 0xd)
+		return(FALSE);
+
+	if (assoc_len > 32768 )
+		return(FALSE);
+
+	buf = (BYTE*)malloc(payload_len + assoc_len + 48 );
+	if (! buf)
+		return(FALSE);
+
+	st14(key_str, key, keysize);
+
+	payload_len_store_size = AES_BLOCK_SIZE - 1 - nonce_len;
+	r10(buf, assoc_len, payload_len, payload_len_store_size, mac_len, nonce, nonce_len);
+	end_of_buf = AES_BLOCK_SIZE;
+
+	w11(buf, &end_of_buf, assoc, assoc_len);
+
+	v12(buf, &end_of_buf, payload, payload_len);
+
+	rnd9(counter, nonce, nonce_len, payload_len_store_size);
+
+	memset(temp_iv, 0, AES_BLOCK_SIZE);
+	acc2(buf, end_of_buf, mac, key, keysize, temp_iv);
+
+	memcpy(out, payload, payload_len);
+	memcpy(&out[payload_len], mac, mac_len);
+
+	memcpy(temp_iv, counter, AES_BLOCK_SIZE);
+	buf4(temp_iv, AES_BLOCK_SIZE - 0x1 - mac_len);   
+	h05(out, payload_len, out, key, keysize, temp_iv);
+
+	h05(&out[payload_len], mac_len, &out[payload_len], key, keysize, counter);
+
+	free(buf);
+	*out_len = payload_len + mac_len;
+
+	return(TRUE);
+}
+
+int blk8(const BYTE ciphertext[], WORD ciphertext_len, const BYTE assoc[], unsigned short assoc_len,
+                    const BYTE nonce[], unsigned short nonce_len, BYTE plaintext[], WORD *plaintext_len,
+                    WORD mac_len, int *mac_auth, const BYTE key_str[], int keysize)
+{
+	BYTE temp_iv[AES_BLOCK_SIZE], counter[AES_BLOCK_SIZE], mac[16], mac_buf[16], *buf;
+	int end_of_buf, plaintext_len_store_size;
+	WORD key[60];
+
+	if (ciphertext_len <= mac_len)
+		return(FALSE);
+
+	buf = (BYTE*)malloc(assoc_len + ciphertext_len  + 0x30);
+	if (! buf)
+		return(FALSE);
+
+	st14(key_str, key, keysize);
+
+	*plaintext_len = ciphertext_len - mac_len;
+	plaintext_len_store_size = AES_BLOCK_SIZE - 0x1 - nonce_len;
+	memcpy(plaintext, ciphertext, *plaintext_len);
+	memcpy(mac, &ciphertext[*plaintext_len], mac_len);
+
+	rnd9(counter, nonce, nonce_len, plaintext_len_store_size);
+
+	memcpy(temp_iv, counter, AES_BLOCK_SIZE);
+	buf4(temp_iv, AES_BLOCK_SIZE - 0x1 - mac_len);   
+	q6(plaintext, *plaintext_len, plaintext, key, keysize, temp_iv);
+
+	if (mac_auth != NULL) {
+		
+		q6(mac, mac_len, mac, key, keysize, counter);
+
+		plaintext_len_store_size = AES_BLOCK_SIZE - 1 - nonce_len;
+		r10(buf, assoc_len, *plaintext_len, plaintext_len_store_size, mac_len, nonce, nonce_len);
+		end_of_buf = AES_BLOCK_SIZE;
+
+		w11(buf, &end_of_buf, assoc, assoc_len);
+
+		v12(buf, &end_of_buf, plaintext, *plaintext_len);
+
+		memset(temp_iv, 0, AES_BLOCK_SIZE);
+		acc2(buf, end_of_buf, mac_buf, key, keysize, temp_iv);
+
+		if (! memcmp(mac, mac_buf, mac_len)) {
+			*mac_auth = TRUE;
+		}
+		else {
+			*mac_auth = FALSE;
+			memset(plaintext, 0, *plaintext_len);
+		}
+	}
+
+	free(buf);
+
+	return(TRUE);
+}
+
+void rnd9(BYTE counter[], const BYTE nonce[], int nonce_len, int payload_len_store_size)
+{
+	memset(counter, 0x0, AES_BLOCK_SIZE);
+	counter[0] = (payload_len_store_size - 0x1) & 0x07;
+	memcpy(&counter[1], nonce, nonce_len);
+}
+
+void r10(BYTE buf[], int assoc_len, int payload_len, int payload_len_store_size, int mac_len, const BYTE nonce[], int nonce_len)
+{
+	
+	buf[0x0] = ((((mac_len - 2) / 0x2) & 7) << 3) | ((payload_len_store_size - 1) & 0x07);
+	if (assoc_len > 0x0)
+		buf[0] += 0x40;
+	
+	memcpy(&buf[0x1], nonce, nonce_len);
+	memset(&buf[0x1 + nonce_len], 0, AES_BLOCK_SIZE - 1 - nonce_len);
+	buf[0xf] = payload_len & 255;
+	buf[0xe] = (payload_len >> 8) & 255;
+}
+
+void w11(BYTE buf[], int *end_of_buf, const BYTE assoc[], int assoc_len)
+{
+	int pad;
+
+	buf[*end_of_buf + 1] = assoc_len & 255;
+	buf[*end_of_buf] = (assoc_len >> 8) & 255;
+	*end_of_buf += 0x2;
+	memcpy(&buf[*end_of_buf], assoc, assoc_len);
+	*end_of_buf += assoc_len;
+	pad = AES_BLOCK_SIZE - (*end_of_buf % AES_BLOCK_SIZE); 
+	memset(&buf[*end_of_buf], 0x0, pad);
+	*end_of_buf += pad;
+}
+
+void v12(BYTE buf[], int *end_of_buf, const BYTE payload[], int payload_len)
+{
+	int pad;
+
+	memcpy(&buf[*end_of_buf], payload, payload_len);
+	*end_of_buf += payload_len;
+	pad = *end_of_buf % AES_BLOCK_SIZE;
+	if (pad != 0)
+		pad = AES_BLOCK_SIZE - pad;
+	memset(&buf[*end_of_buf], 0, pad);
+	*end_of_buf += pad;
+}
+
+WORD z13(WORD word)
+{
+	unsigned int result;
+
+	result = (int)aes_sbox[(word >> 0x4) & 0x0000000F][word & 15];
+	result += (int)aes_sbox[(word >> 12) & 15][(word >> 8) & 15] << 0x8;
+	result += (int)aes_sbox[(word >> 0x14) & 15][(word >> 0x10) & 0x0000000F] << 16;
+	result += (int)aes_sbox[(word >> 0x1c) & 0x0000000F][(word >> 0x18) & 15] << 24;
+	return(result);
+}
+
+void st14(const BYTE key[], WORD w[], int keysize)
+{
+	int Nb=4,Nr,Nk,idx;
+	WORD temp,Rcon[]={16777216,33554432,67108864,134217728,0x10000000,536870912,
+	                  1073741824,0x80000000,0x1b000000,905969664,0x6c000000,0xd8000000,
+	                  0xab000000,1291845632,2583691264};
+
+	tmp15 (keysize) {
+		case 128: Nr = 0xa; Nk = 4; break;
+		case 0xc0: Nr = 12; Nk = 0x6; break;
+		case 256: Nr = 14; Nk = 0x8; break;
+		default: return;
+	}
+
+	for (idx=0; idx < Nk; ++idx) {
+		w[idx] = ((key[0x4 * idx]) << 24) | ((key[4 * idx + 0x1]) << 16) |
+				   ((key[0x4 * idx + 2]) << 8) | ((key[0x4 * idx + 3]));
+	}
+
+	for (idx = Nk; idx < Nb * (Nr+1); ++idx) {
+		temp = w[idx - 1];
+		if ((idx % Nk) == 0x0)
+			temp = z13(KE_ROTWORD(temp)) ^ Rcon[(idx-0x1)/Nk];
+		else if (Nk > 6 && (idx % Nk) == 4)
+			temp = z13(temp);
+		w[idx] = w[idx-Nk] ^ temp;
+	}
+}
+
+void acc16(BYTE state[][4], const WORD w[])
+{
+	BYTE subkey[0x4];
+
+	
+	subkey[0x0] = w[0x0] >> 24;
+	subkey[0x1] = w[0] >> 16;
+	subkey[0x2] = w[0] >> 8;
+	subkey[3] = w[0x0];
+	state[0][0] ^= subkey[0];
+	state[1][0] ^= subkey[0x1];
+	state[2][0x0] ^= subkey[0x2];
+	state[3][0x0] ^= subkey[0x3];
+	
+	subkey[0] = w[0x1] >> 0x18;
+	subkey[0x1] = w[0x1] >> 16;
+	subkey[0x2] = w[1] >> 8;
+	subkey[0x3] = w[0x1];
+	state[0x0][0x1] ^= subkey[0];
+	state[0x1][0x1] ^= subkey[0x1];
+	state[2][0x1] ^= subkey[2];
+	state[3][0x1] ^= subkey[3];
+	
+	subkey[0] = w[0x2] >> 24;
+	subkey[0x1] = w[2] >> 0x10;
+	subkey[2] = w[0x2] >> 0x8;
+	subkey[3] = w[0x2];
+	state[0][0x2] ^= subkey[0x0];
+	state[1][0x2] ^= subkey[0x1];
+	state[0x2][2] ^= subkey[2];
+	state[3][0x2] ^= subkey[0x3];
+	
+	subkey[0x0] = w[3] >> 24;
+	subkey[1] = w[3] >> 0x10;
+	subkey[2] = w[0x3] >> 8;
+	subkey[3] = w[3];
+	state[0x0][0x3] ^= subkey[0x0];
+	state[0x1][3] ^= subkey[1];
+	state[0x2][0x3] ^= subkey[0x2];
+	state[0x3][0x3] ^= subkey[0x3];
+}
+
+void x17(BYTE state[][4])
+{
+	state[0x0][0x0] = aes_sbox[state[0x0][0] >> 0x4][state[0][0x0] & 0x0F];
+	state[0][1] = aes_sbox[state[0x0][0x1] >> 4][state[0][0x1] & 15];
+	state[0x0][0x2] = aes_sbox[state[0][0x2] >> 0x4][state[0x0][0x2] & 15];
+	state[0][0x3] = aes_sbox[state[0][3] >> 4][state[0][3] & 0x0F];
+	state[0x1][0x0] = aes_sbox[state[1][0x0] >> 4][state[1][0] & 15];
+	state[1][0x1] = aes_sbox[state[0x1][0x1] >> 4][state[0x1][1] & 0x0F];
+	state[0x1][0x2] = aes_sbox[state[1][0x2] >> 0x4][state[1][0x2] & 15];
+	state[0x1][0x3] = aes_sbox[state[0x1][3] >> 4][state[1][0x3] & 0x0F];
+	state[0x2][0x0] = aes_sbox[state[0x2][0x0] >> 4][state[2][0] & 15];
+	state[0x2][1] = aes_sbox[state[0x2][1] >> 0x4][state[0x2][0x1] & 0x0F];
+	state[2][0x2] = aes_sbox[state[0x2][0x2] >> 4][state[0x2][2] & 0x0F];
+	state[2][3] = aes_sbox[state[2][0x3] >> 0x4][state[2][0x3] & 15];
+	state[0x3][0] = aes_sbox[state[3][0] >> 4][state[3][0] & 15];
+	state[3][0x1] = aes_sbox[state[3][0x1] >> 0x4][state[0x3][0x1] & 15];
+	state[3][2] = aes_sbox[state[0x3][2] >> 0x4][state[0x3][0x2] & 15];
+	state[0x3][0x3] = aes_sbox[state[3][0x3] >> 4][state[3][3] & 0x0F];
+}
+
+void buf18(BYTE state[][4])
+{
+	state[0x0][0x0] = aes_invsbox[state[0x0][0x0] >> 0x4][state[0x0][0] & 15];
+	state[0][1] = aes_invsbox[state[0][0x1] >> 4][state[0][1] & 15];
+	state[0][2] = aes_invsbox[state[0x0][2] >> 0x4][state[0x0][2] & 0x0F];
+	state[0x0][3] = aes_invsbox[state[0x0][3] >> 0x4][state[0][3] & 0x0F];
+	state[1][0] = aes_invsbox[state[0x1][0] >> 4][state[0x1][0x0] & 15];
+	state[1][0x1] = aes_invsbox[state[0x1][1] >> 4][state[0x1][1] & 15];
+	state[0x1][2] = aes_invsbox[state[0x1][0x2] >> 0x4][state[1][0x2] & 15];
+	state[1][3] = aes_invsbox[state[0x1][0x3] >> 4][state[0x1][0x3] & 15];
+	state[0x2][0x0] = aes_invsbox[state[2][0] >> 4][state[2][0] & 15];
+	state[2][1] = aes_invsbox[state[0x2][1] >> 4][state[0x2][1] & 15];
+	state[0x2][0x2] = aes_invsbox[state[0x2][0x2] >> 0x4][state[0x2][2] & 15];
+	state[2][3] = aes_invsbox[state[0x2][0x3] >> 4][state[2][3] & 15];
+	state[0x3][0x0] = aes_invsbox[state[0x3][0] >> 0x4][state[0x3][0] & 15];
+	state[0x3][0x1] = aes_invsbox[state[3][0x1] >> 0x4][state[3][0x1] & 15];
+	state[0x3][2] = aes_invsbox[state[3][2] >> 0x4][state[0x3][0x2] & 0x0F];
+	state[3][0x3] = aes_invsbox[state[3][3] >> 4][state[0x3][3] & 0x0F];
+}
+
+void h019(BYTE state[][4])
+{
+	int t;
+
+	t = state[0x1][0];
+	state[1][0x0] = state[1][1];
+	state[1][0x1] = state[0x1][0x2];
+	state[1][2] = state[1][0x3];
+	state[1][0x3] = t;
+	
+	t = state[0x2][0x0];
+	state[2][0] = state[2][0x2];
+	state[2][0x2] = t;
+	t = state[0x2][0x1];
+	state[2][1] = state[0x2][0x3];
+	state[2][3] = t;
+	
+	t = state[0x3][0];
+	state[0x3][0x0] = state[0x3][0x3];
+	state[0x3][3] = state[3][2];
+	state[0x3][2] = state[3][1];
+	state[0x3][1] = t;
+}
+
+void q20(BYTE state[][4])
+{
+	int t;
+
+	t = state[0x1][3];
+	state[1][0x3] = state[0x1][2];
+	state[0x1][2] = state[1][1];
+	state[0x1][1] = state[0x1][0x0];
+	state[1][0] = t;
+	
+	t = state[2][3];
+	state[2][3] = state[0x2][1];
+	state[0x2][1] = t;
+	t = state[2][0x2];
+	state[2][0x2] = state[0x2][0x0];
+	state[0x2][0x0] = t;
+	
+	t = state[0x3][0x3];
+	state[3][3] = state[3][0];
+	state[0x3][0x0] = state[0x3][0x1];
+	state[0x3][1] = state[3][2];
+	state[0x3][2] = t;
+}
+
+void kx21(BYTE state[][4])
+{
+	BYTE col[4];
+
+	col[0x0] = state[0x0][0];
+	col[0x1] = state[1][0];
+	col[0x2] = state[2][0x0];
+	col[3] = state[0x3][0x0];
+	state[0x0][0] = gf_mul[col[0]][0x0];
+	state[0x0][0x0] ^= gf_mul[col[1]][1];
+	state[0][0x0] ^= col[2];
+	state[0x0][0] ^= col[3];
+	state[0x1][0x0] = col[0];
+	state[1][0] ^= gf_mul[col[0x1]][0];
+	state[1][0] ^= gf_mul[col[0x2]][0x1];
+	state[1][0] ^= col[3];
+	state[0x2][0] = col[0];
+	state[0x2][0] ^= col[0x1];
+	state[2][0] ^= gf_mul[col[2]][0x0];
+	state[0x2][0x0] ^= gf_mul[col[3]][1];
+	state[0x3][0x0] = gf_mul[col[0]][0x1];
+	state[3][0x0] ^= col[1];
+	state[3][0] ^= col[0x2];
+	state[0x3][0] ^= gf_mul[col[3]][0];
+	
+	col[0x0] = state[0][0x1];
+	col[1] = state[0x1][1];
+	col[0x2] = state[2][1];
+	col[3] = state[0x3][0x1];
+	state[0][1] = gf_mul[col[0x0]][0x0];
+	state[0][0x1] ^= gf_mul[col[1]][1];
+	state[0][1] ^= col[2];
+	state[0][1] ^= col[0x3];
+	state[0x1][0x1] = col[0];
+	state[1][1] ^= gf_mul[col[0x1]][0];
+	state[0x1][1] ^= gf_mul[col[0x2]][1];
+	state[0x1][0x1] ^= col[0x3];
+	state[2][0x1] = col[0];
+	state[0x2][1] ^= col[0x1];
+	state[0x2][1] ^= gf_mul[col[0x2]][0];
+	state[2][0x1] ^= gf_mul[col[0x3]][1];
+	state[3][1] = gf_mul[col[0x0]][1];
+	state[0x3][0x1] ^= col[1];
+	state[3][0x1] ^= col[2];
+	state[3][1] ^= gf_mul[col[0x3]][0];
+	
+	col[0] = state[0x0][0x2];
+	col[1] = state[0x1][0x2];
+	col[0x2] = state[0x2][2];
+	col[3] = state[3][0x2];
+	state[0][2] = gf_mul[col[0x0]][0];
+	state[0][0x2] ^= gf_mul[col[0x1]][1];
+	state[0][2] ^= col[0x2];
+	state[0x0][0x2] ^= col[0x3];
+	state[1][2] = col[0x0];
+	state[1][0x2] ^= gf_mul[col[1]][0];
+	state[1][0x2] ^= gf_mul[col[2]][0x1];
+	state[1][0x2] ^= col[0x3];
+	state[2][2] = col[0x0];
+	state[0x2][2] ^= col[1];
+	state[0x2][2] ^= gf_mul[col[2]][0];
+	state[0x2][2] ^= gf_mul[col[3]][1];
+	state[0x3][2] = gf_mul[col[0]][1];
+	state[3][0x2] ^= col[1];
+	state[0x3][0x2] ^= col[2];
+	state[3][2] ^= gf_mul[col[3]][0];
+	
+	col[0] = state[0][0x3];
+	col[0x1] = state[1][3];
+	col[2] = state[2][0x3];
+	col[3] = state[3][3];
+	state[0x0][3] = gf_mul[col[0x0]][0];
+	state[0x0][3] ^= gf_mul[col[1]][0x1];
+	state[0][3] ^= col[0x2];
+	state[0x0][0x3] ^= col[3];
+	state[0x1][0x3] = col[0];
+	state[1][3] ^= gf_mul[col[1]][0x0];
+	state[0x1][0x3] ^= gf_mul[col[2]][1];
+	state[0x1][0x3] ^= col[3];
+	state[0x2][0x3] = col[0];
+	state[0x2][0x3] ^= col[1];
+	state[0x2][3] ^= gf_mul[col[0x2]][0];
+	state[0x2][0x3] ^= gf_mul[col[3]][1];
+	state[0x3][3] = gf_mul[col[0x0]][0x1];
+	state[0x3][3] ^= col[0x1];
+	state[0x3][3] ^= col[0x2];
+	state[3][3] ^= gf_mul[col[3]][0x0];
+}
+
+void blk22(BYTE state[][0x4])
+{
+	BYTE col[0x4];
+
+	col[0] = state[0][0];
+	col[0x1] = state[1][0];
+	col[0x2] = state[2][0];
+	col[0x3] = state[3][0x0];
+	state[0x0][0] = gf_mul[col[0]][5];
+	state[0][0] ^= gf_mul[col[1]][0x3];
+	state[0][0] ^= gf_mul[col[2]][0x4];
+	state[0][0] ^= gf_mul[col[3]][0x2];
+	state[0x1][0] = gf_mul[col[0x0]][2];
+	state[1][0] ^= gf_mul[col[1]][0x5];
+	state[0x1][0] ^= gf_mul[col[0x2]][0x3];
+	state[1][0] ^= gf_mul[col[0x3]][0x4];
+	state[0x2][0x0] = gf_mul[col[0x0]][0x4];
+	state[0x2][0x0] ^= gf_mul[col[1]][0x2];
+	state[2][0x0] ^= gf_mul[col[0x2]][0x5];
+	state[2][0x0] ^= gf_mul[col[3]][0x3];
+	state[3][0] = gf_mul[col[0x0]][3];
+	state[3][0] ^= gf_mul[col[0x1]][4];
+	state[0x3][0] ^= gf_mul[col[2]][2];
+	state[0x3][0x0] ^= gf_mul[col[3]][0x5];
+	
+	col[0x0] = state[0x0][0x1];
+	col[1] = state[0x1][1];
+	col[2] = state[2][1];
+	col[0x3] = state[3][0x1];
+	state[0x0][0x1] = gf_mul[col[0]][5];
+	state[0x0][0x1] ^= gf_mul[col[1]][3];
+	state[0][1] ^= gf_mul[col[2]][4];
+	state[0x0][0x1] ^= gf_mul[col[3]][2];
+	state[1][0x1] = gf_mul[col[0x0]][0x2];
+	state[0x1][1] ^= gf_mul[col[0x1]][5];
+	state[0x1][1] ^= gf_mul[col[2]][0x3];
+	state[0x1][0x1] ^= gf_mul[col[0x3]][0x4];
+	state[0x2][1] = gf_mul[col[0x0]][0x4];
+	state[0x2][0x1] ^= gf_mul[col[1]][2];
+	state[2][1] ^= gf_mul[col[0x2]][5];
+	state[0x2][1] ^= gf_mul[col[3]][3];
+	state[0x3][0x1] = gf_mul[col[0x0]][3];
+	state[3][1] ^= gf_mul[col[0x1]][0x4];
+	state[3][0x1] ^= gf_mul[col[0x2]][0x2];
+	state[0x3][0x1] ^= gf_mul[col[3]][0x5];
+	
+	col[0] = state[0x0][2];
+	col[0x1] = state[0x1][2];
+	col[0x2] = state[2][2];
+	col[3] = state[0x3][0x2];
+	state[0][0x2] = gf_mul[col[0x0]][5];
+	state[0][2] ^= gf_mul[col[1]][3];
+	state[0][2] ^= gf_mul[col[2]][0x4];
+	state[0x0][2] ^= gf_mul[col[3]][0x2];
+	state[1][2] = gf_mul[col[0x0]][2];
+	state[0x1][0x2] ^= gf_mul[col[0x1]][0x5];
+	state[0x1][2] ^= gf_mul[col[2]][0x3];
+	state[1][2] ^= gf_mul[col[0x3]][0x4];
+	state[2][2] = gf_mul[col[0]][0x4];
+	state[2][0x2] ^= gf_mul[col[1]][2];
+	state[0x2][0x2] ^= gf_mul[col[2]][5];
+	state[2][0x2] ^= gf_mul[col[0x3]][0x3];
+	state[3][2] = gf_mul[col[0x0]][0x3];
+	state[0x3][0x2] ^= gf_mul[col[0x1]][0x4];
+	state[3][0x2] ^= gf_mul[col[0x2]][0x2];
+	state[3][2] ^= gf_mul[col[3]][5];
+	
+	col[0] = state[0x0][0x3];
+	col[1] = state[1][3];
+	col[2] = state[2][3];
+	col[3] = state[0x3][0x3];
+	state[0x0][0x3] = gf_mul[col[0]][0x5];
+	state[0x0][3] ^= gf_mul[col[1]][0x3];
+	state[0][0x3] ^= gf_mul[col[0x2]][0x4];
+	state[0x0][3] ^= gf_mul[col[3]][0x2];
+	state[1][0x3] = gf_mul[col[0]][2];
+	state[0x1][0x3] ^= gf_mul[col[0x1]][5];
+	state[0x1][3] ^= gf_mul[col[2]][0x3];
+	state[1][3] ^= gf_mul[col[3]][0x4];
+	state[0x2][3] = gf_mul[col[0x0]][4];
+	state[2][3] ^= gf_mul[col[1]][0x2];
+	state[2][0x3] ^= gf_mul[col[2]][0x5];
+	state[2][0x3] ^= gf_mul[col[3]][3];
+	state[0x3][3] = gf_mul[col[0]][3];
+	state[0x3][0x3] ^= gf_mul[col[0x1]][0x4];
+	state[0x3][3] ^= gf_mul[col[2]][0x2];
+	state[3][0x3] ^= gf_mul[col[3]][0x5];
+}
+
+void rnd23(const BYTE in[], BYTE out[], const WORD key[], int keysize)
+{
+	BYTE state[4][0x4];
+
+	
+
+	
+	state[0][0x0] = in[0];
+	state[0x1][0] = in[0x1];
+	state[0x2][0x0] = in[0x2];
+	state[3][0x0] = in[3];
+	state[0][0x1] = in[4];
+	state[1][1] = in[5];
+	state[2][1] = in[6];
+	state[3][1] = in[7];
+	state[0x0][2] = in[8];
+	state[1][0x2] = in[0x9];
+	state[0x2][2] = in[0xa];
+	state[3][2] = in[11];
+	state[0x0][3] = in[0xc];
+	state[1][3] = in[13];
+	state[2][0x3] = in[14];
+	state[0x3][3] = in[15];
+
+	
+	acc16(state,&key[0]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[0x4]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[8]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[12]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[0x10]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[20]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[24]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[28]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[32]);
+	x17(state); h019(state); kx21(state); acc16(state,&key[0x24]);
+	if (keysize != 0x80) {
+		x17(state); h019(state); kx21(state); acc16(state,&key[40]);
+		x17(state); h019(state); kx21(state); acc16(state,&key[44]);
+		if (keysize != 0xc0) {
+			x17(state); h019(state); kx21(state); acc16(state,&key[0x30]);
+			x17(state); h019(state); kx21(state); acc16(state,&key[0x34]);
+			x17(state); h019(state); acc16(state,&key[0x38]);
+		}
+		else {
+			x17(state); h019(state); acc16(state,&key[0x30]);
+		}
+	}
+	else {
+		x17(state); h019(state); acc16(state,&key[0x28]);
+	}
+
+	out[0] = state[0x0][0];
+	out[0x1] = state[0x1][0];
+	out[2] = state[2][0x0];
+	out[3] = state[0x3][0];
+	out[0x4] = state[0x0][0x1];
+	out[0x5] = state[0x1][1];
+	out[6] = state[0x2][0x1];
+	out[0x7] = state[3][1];
+	out[0x8] = state[0x0][0x2];
+	out[9] = state[1][0x2];
+	out[10] = state[0x2][0x2];
+	out[11] = state[3][2];
+	out[0xc] = state[0][3];
+	out[13] = state[0x1][0x3];
+	out[0xe] = state[0x2][3];
+	out[15] = state[3][3];
+}
+
+void r24(const BYTE in[], BYTE out[], const WORD key[], int keysize)
+{
+	BYTE state[4][0x4];
+
+	state[0][0] = in[0];
+	state[1][0x0] = in[1];
+	state[2][0] = in[0x2];
+	state[0x3][0x0] = in[3];
+	state[0][0x1] = in[0x4];
+	state[0x1][0x1] = in[5];
+	state[0x2][1] = in[0x6];
+	state[0x3][1] = in[0x7];
+	state[0x0][0x2] = in[0x8];
+	state[1][0x2] = in[9];
+	state[0x2][0x2] = in[10];
+	state[3][0x2] = in[11];
+	state[0x0][0x3] = in[12];
+	state[0x1][3] = in[13];
+	state[0x2][3] = in[14];
+	state[3][3] = in[0xf];
+
+	
+	if (keysize > 128) {
+		if (keysize > 0xc0) {
+			acc16(state,&key[56]);
+			q20(state);buf18(state);acc16(state,&key[52]);blk22(state);
+			q20(state);buf18(state);acc16(state,&key[48]);blk22(state);
+		}
+		else {
+			acc16(state,&key[48]);
+		}
+		q20(state);buf18(state);acc16(state,&key[44]);blk22(state);
+		q20(state);buf18(state);acc16(state,&key[0x28]);blk22(state);
+	}
+	else {
+		acc16(state,&key[40]);
+	}
+	q20(state);buf18(state);acc16(state,&key[0x24]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0x20]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[28]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0x18]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0x14]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0x10]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0xc]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[8]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0x4]);blk22(state);
+	q20(state);buf18(state);acc16(state,&key[0]);
+
+	out[0x0] = state[0][0x0];
+	out[0x1] = state[1][0x0];
+	out[2] = state[0x2][0x0];
+	out[3] = state[0x3][0];
+	out[4] = state[0][1];
+	out[5] = state[1][0x1];
+	out[6] = state[0x2][1];
+	out[7] = state[3][1];
+	out[0x8] = state[0][0x2];
+	out[0x9] = state[0x1][2];
+	out[0xa] = state[2][2];
+	out[11] = state[3][0x2];
+	out[12] = state[0x0][3];
+	out[0xd] = state[0x1][0x3];
+	out[0xe] = state[2][3];
+	out[15] = state[0x3][3];
+}
+

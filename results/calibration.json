@@ -1,0 +1,234 @@
+{
+  "llm": {
+    "n_scored": 363,
+    "ece": 0.0288,
+    "mce": 0.62,
+    "bins": [
+      {
+        "lo": 0.0,
+        "hi": 0.1,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.1,
+        "hi": 0.2,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.2,
+        "hi": 0.3,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.3,
+        "hi": 0.4,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.4,
+        "hi": 0.5,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.5,
+        "hi": 0.6,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.6,
+        "hi": 0.7,
+        "n": 1,
+        "mean_conf": 0.62,
+        "accuracy": 0.0,
+        "gap": 0.62
+      },
+      {
+        "lo": 0.7,
+        "hi": 0.8,
+        "n": 14,
+        "mean_conf": 0.722,
+        "accuracy": 0.714,
+        "gap": 0.008
+      },
+      {
+        "lo": 0.8,
+        "hi": 0.9,
+        "n": 38,
+        "mean_conf": 0.836,
+        "accuracy": 0.947,
+        "gap": 0.112
+      },
+      {
+        "lo": 0.9,
+        "hi": 1.0,
+        "n": 310,
+        "mean_conf": 0.979,
+        "accuracy": 0.997,
+        "gap": 0.018
+      }
+    ],
+    "positive_flags": {
+      "n_positive_flags": 310,
+      "target_precision": 0.98,
+      "trust_threshold": 0.72,
+      "by_conf": [
+        {
+          "lo": 0.7,
+          "hi": 0.8,
+          "n": 10,
+          "precision": 1.0
+        },
+        {
+          "lo": 0.8,
+          "hi": 0.9,
+          "n": 35,
+          "precision": 1.0
+        },
+        {
+          "lo": 0.9,
+          "hi": 1.0,
+          "n": 265,
+          "precision": 0.996
+        }
+      ]
+    },
+    "reading": "well-calibrated"
+  },
+  "hybrid": {
+    "n_scored": 363,
+    "ece": 0.0341,
+    "mce": 0.42,
+    "bins": [
+      {
+        "lo": 0.0,
+        "hi": 0.1,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.1,
+        "hi": 0.2,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.2,
+        "hi": 0.3,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.3,
+        "hi": 0.4,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.4,
+        "hi": 0.5,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.5,
+        "hi": 0.6,
+        "n": 0,
+        "mean_conf": null,
+        "accuracy": null,
+        "gap": null
+      },
+      {
+        "lo": 0.6,
+        "hi": 0.7,
+        "n": 5,
+        "mean_conf": 0.62,
+        "accuracy": 0.2,
+        "gap": 0.42
+      },
+      {
+        "lo": 0.7,
+        "hi": 0.8,
+        "n": 10,
+        "mean_conf": 0.735,
+        "accuracy": 0.7,
+        "gap": 0.035
+      },
+      {
+        "lo": 0.8,
+        "hi": 0.9,
+        "n": 39,
+        "mean_conf": 0.835,
+        "accuracy": 0.923,
+        "gap": 0.088
+      },
+      {
+        "lo": 0.9,
+        "hi": 1.0,
+        "n": 309,
+        "mean_conf": 0.979,
+        "accuracy": 1.0,
+        "gap": 0.021
+      }
+    ],
+    "positive_flags": {
+      "n_positive_flags": 308,
+      "target_precision": 0.98,
+      "trust_threshold": 0.62,
+      "by_conf": [
+        {
+          "lo": 0.6,
+          "hi": 0.7,
+          "n": 1,
+          "precision": 1.0
+        },
+        {
+          "lo": 0.7,
+          "hi": 0.8,
+          "n": 7,
+          "precision": 1.0
+        },
+        {
+          "lo": 0.8,
+          "hi": 0.9,
+          "n": 36,
+          "precision": 0.972
+        },
+        {
+          "lo": 0.9,
+          "hi": 1.0,
+          "n": 264,
+          "precision": 1.0
+        }
+      ]
+    },
+    "reading": "well-calibrated"
+  }
+}

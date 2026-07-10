@@ -1,0 +1,11 @@
+filepath,language,is_crypto,primary_algorithm,family,quantum_vulnerable,tier,split,source,notes
+corpus/tier0_library_idiomatic/rsa_keygen.py,python,true,RSA,asymmetric,yes,0,public,handwritten-seed,idiomatic library keygen
+corpus/tier1_library_indirect/wrapped_aes.py,python,true,AES-GCM,symmetric,no,1,public,handwritten-seed,library call behind a wrapper + aliased imports
+corpus/tier2_handrolled_textbook/rsa_scratch.py,python,true,RSA,asymmetric,yes,2,public,handwritten-seed,textbook modexp RSA no import
+corpus/tier3_handrolled_obfuscated/q.py,python,true,RSA,asymmetric,yes,3,novel,derived:rsa_scratch.py,renamed vars + inlined 65537 + split modexp
+corpus/tier4_handrolled_novel/mixer.go,go,true,custom-feistel,symmetric,no,4,synth,handwritten-seed,bespoke block cipher round no stdlib crypto
+corpus/negatives/djb2.py,python,false,,none,na,neg,public,handwritten-seed,non-crypto hashmap hash (precision test)
+corpus/negatives/bignum_dsp.py,python,false,,none,na,neg,novel,handwritten-seed,modular arithmetic NTT for DSP not crypto
+corpus/tier5_unrecognizable/license_seal.py,python,true,custom-stream,symmetric,no,5,novel,handwritten-seed,subclass2 fused-in-business-logic homegrown keyed stream cipher
+corpus/tier5_unrecognizable/obscure_xform.c,c,true,custom-spn,symmetric,no,5,novel,handwritten-seed,subclass3 homegrown non-canonical cipher expect_algorithm_match=false
+corpus/tier5_unrecognizable/rolling_dedup.py,python,false,,none,na,neg,novel,handwritten-seed,tier5-decoy rolling hash for dedup not crypto (precision test)

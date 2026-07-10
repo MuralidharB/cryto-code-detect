@@ -1,0 +1,378 @@
+filepath,language,is_crypto,primary_algorithm,family,quantum_vulnerable,tier,split,source,notes,subclass,label_rationale,expect_algorithm_match,compose_group,labeler_a,labeler_b
+corpus/tier0_library_idiomatic/Md4Bouncy.java,java,true,MD4,hash,no,0,public,https://rosettacode.org/wiki/MD4,verbatim public seed,,,,,,
+corpus/tier0_library_idiomatic/aes_gcm_examples.go,go,true,AES-GCM,symmetric,no,0,public,https://raw.githubusercontent.com/golang/go/master/src/crypto/cipher/example_test.go,verbatim public seed,,,,,,
+corpus/tier0_library_idiomatic/md4_xcrypto.go,go,true,MD4,hash,no,0,public,https://rosettacode.org/wiki/MD4,verbatim public seed,,,,,,
+corpus/tier0_library_idiomatic/sha1_hashlib.py,python,true,SHA-1,hash,no,0,public,https://rosettacode.org/wiki/SHA-1,verbatim public seed,,,,,,
+corpus/tier0_library_idiomatic/sha1_openssl.c,c,true,SHA-1,hash,no,0,public,https://rosettacode.org/wiki/SHA-1,verbatim public seed,,,,,,
+corpus/tier0_library_idiomatic/sha256_stdlib.go,go,true,SHA-256,hash,no,0,public,https://rosettacode.org/wiki/SHA-256,verbatim public seed,,,,,,
+corpus/_dev/tier0_library_idiomatic/LibAesGcm.java,java,true,AES-GCM,symmetric,no,0,synth,authored,javax.crypto.Cipher AES/GCM,,,,,,
+corpus/_dev/tier0_library_idiomatic/LibSecureRandom.java,java,true,AES,symmetric,no,0,synth,authored,SecureRandom + AES KeyGenerator,,,,,,
+corpus/_dev/tier0_library_idiomatic/lib_aesgcm.go,go,true,AES-GCM,symmetric,no,0,synth,authored,crypto/aes + crypto/cipher GCM,,,,,,
+corpus/_dev/tier0_library_idiomatic/lib_ed25519.go,go,true,Ed25519,asymmetric,yes,0,synth,authored,crypto/ed25519 sign (Shor-breakable),,,,,,
+corpus/_dev/tier0_library_idiomatic/lib_fernet.py,python,true,Fernet,symmetric,no,0,synth,authored,cryptography Fernet encrypt/decrypt,,,,,,
+corpus/_dev/tier0_library_idiomatic/lib_pbkdf2_hashlib.py,python,true,PBKDF2,kdf,no,0,synth,authored,hashlib.pbkdf2_hmac key derivation,,,,,,
+corpus/_dev/tier0_library_idiomatic/lib_sha256.go,go,true,SHA-256,hash,no,0,synth,authored,crypto/sha256,,,,,,
+corpus/_dev/tier0_library_idiomatic/lib_x25519_pyca.py,python,true,X25519,asymmetric,yes,0,synth,authored,"cryptography X25519 key exchange (ECC, Shor-breakable)",,,,,,
+corpus/tier0_library_idiomatic/LibEcKeyGen.java,java,true,ECDSA,asymmetric,yes,0,synth,authored,KeyPairGenerator EC (Shor-breakable),,,,,,
+corpus/tier0_library_idiomatic/LibHmacSha256.java,java,true,HMAC-SHA256,mac,no,0,synth,authored,javax.crypto.Mac HmacSHA256,,,,,,
+corpus/tier0_library_idiomatic/LibPbkdf2.java,java,true,PBKDF2,kdf,no,0,synth,authored,SecretKeyFactory PBKDF2WithHmacSHA256,,,,,,
+corpus/tier0_library_idiomatic/LibRsaCipher.java,java,true,RSA,asymmetric,yes,0,synth,authored,javax.crypto.Cipher RSA,,,,,,
+corpus/tier0_library_idiomatic/LibSha256.java,java,true,SHA-256,hash,no,0,synth,authored,MessageDigest SHA-256,,,,,,
+corpus/tier0_library_idiomatic/LibSha512.java,java,true,SHA-512,hash,no,0,synth,authored,MessageDigest SHA-512,,,,,,
+corpus/tier0_library_idiomatic/lib_aesgcm_pyca.py,python,true,AES-GCM,symmetric,no,0,synth,authored,cryptography AESGCM encrypt,,,,,,
+corpus/tier0_library_idiomatic/lib_blake2_hashlib.py,python,true,BLAKE2b,hash,no,0,synth,authored,hashlib.blake2b digest,,,,,,
+corpus/tier0_library_idiomatic/lib_chacha20_pyca.py,python,true,ChaCha20-Poly1305,symmetric,no,0,synth,authored,cryptography ChaCha20Poly1305,,,,,,
+corpus/tier0_library_idiomatic/lib_ecdsa.go,go,true,ECDSA,asymmetric,yes,0,synth,authored,crypto/ecdsa sign (Shor-breakable),,,,,,
+corpus/tier0_library_idiomatic/lib_ed25519_pyca.py,python,true,Ed25519,asymmetric,yes,0,synth,authored,"cryptography Ed25519 sign (ECC-based, Shor-breakable)",,,,,,
+corpus/tier0_library_idiomatic/lib_evp_aes.c,c,true,AES-CBC,symmetric,no,0,synth,authored,OpenSSL EVP_EncryptUpdate AES-256-CBC,,,,,,
+corpus/tier0_library_idiomatic/lib_evp_hmac.c,c,true,HMAC-SHA256,mac,no,0,synth,authored,OpenSSL HMAC(),,,,,,
+corpus/tier0_library_idiomatic/lib_evp_sha256.c,c,true,SHA-256,hash,no,0,synth,authored,OpenSSL EVP_Digest SHA-256,,,,,,
+corpus/tier0_library_idiomatic/lib_hmac.go,go,true,HMAC-SHA256,mac,no,0,synth,authored,crypto/hmac + crypto/sha256,,,,,,
+corpus/tier0_library_idiomatic/lib_hmac_sha256.py,python,true,HMAC-SHA256,mac,no,0,synth,authored,"hmac.new(key, msg, sha256)",,,,,,
+corpus/tier0_library_idiomatic/lib_md5.go,go,true,MD5,hash,no,0,synth,authored,crypto/md5,,,,,,
+corpus/tier0_library_idiomatic/lib_md5_hashlib.py,python,true,MD5,hash,no,0,synth,authored,hashlib.md5 digest,,,,,,
+corpus/tier0_library_idiomatic/lib_rc4.go,go,true,RC4,symmetric,no,0,synth,authored,crypto/rc4 stream,,,,,,
+corpus/tier0_library_idiomatic/lib_rsa_keygen.go,go,true,RSA,asymmetric,yes,0,synth,authored,crypto/rsa GenerateKey,,,,,,
+corpus/tier0_library_idiomatic/lib_rsa_keygen_pyca.py,python,true,RSA,asymmetric,yes,0,synth,authored,cryptography rsa.generate_private_key,,,,,,
+corpus/tier0_library_idiomatic/lib_sha1.go,go,true,SHA-1,hash,no,0,synth,authored,crypto/sha1,,,,,,
+corpus/tier0_library_idiomatic/lib_sha256_hashlib.py,python,true,SHA-256,hash,no,0,synth,authored,hashlib.sha256 digest,,,,,,
+corpus/tier0_library_idiomatic/lib_sha3.go,go,true,SHA3-256,hash,no,0,synth,authored,golang.org/x/crypto/sha3,,,,,,
+corpus/tier0_library_idiomatic/lib_sha512.go,go,true,SHA-512,hash,no,0,synth,authored,crypto/sha512,,,,,,
+corpus/tier0_library_idiomatic/lib_sha512_hashlib.py,python,true,SHA-512,hash,no,0,synth,authored,hashlib.sha512 digest,,,,,,
+corpus/_dev/tier1_library_indirect/CipherWrapper.java,java,true,AES-GCM,symmetric,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/_dev/tier1_library_indirect/IndEcdh.java,java,true,ECDH,asymmetric,yes,1,synth,authored,KeyAgreement ECDH via wrapper (Shor),,,,,,
+corpus/_dev/tier1_library_indirect/MacHelper.java,java,true,HMAC-SHA256,mac,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/_dev/tier1_library_indirect/ind_aescbc_factory.go,go,true,AES-CBC,symmetric,no,1,synth,authored,crypto/aes CBC via factory,,,,,,
+corpus/_dev/tier1_library_indirect/ind_chacha_alias.go,go,true,ChaCha20,symmetric,no,1,synth,authored,x/crypto/chacha20 aliased import,,,,,,
+corpus/_dev/tier1_library_indirect/ind_evp_aesctr.c,c,true,AES-CTR,symmetric,no,1,synth,authored,OpenSSL EVP AES-CTR behind wrapper + fn pointer,,,,,,
+corpus/_dev/tier1_library_indirect/ind_rsa_dispatch.go,go,true,RSA,asymmetric,yes,1,synth,authored,crypto/rsa via interface dispatch (Shor),,,,,,
+corpus/_dev/tier1_library_indirect/ind_sha512_getattr.py,python,true,SHA-512,hash,no,1,synth,authored,hashlib via getattr dynamic dispatch,,,,,,
+corpus/tier1_library_indirect/DigestFactory.java,java,true,SHA-256,hash,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/IndAesCtr.java,java,true,AES-CTR,symmetric,no,1,synth,authored,"Cipher AES/CTR, transform from variables",,,,,,
+corpus/tier1_library_indirect/IndBlake2.java,java,true,BLAKE2b,hash,no,1,synth,authored,BouncyCastle Blake2b via provider lookup,,,,,,
+corpus/tier1_library_indirect/IndChaCha.java,java,true,ChaCha20,symmetric,no,1,synth,authored,Cipher ChaCha20 via helper,,,,,,
+corpus/tier1_library_indirect/IndHmac512.java,java,true,HMAC-SHA512,mac,no,1,synth,authored,Mac HmacSHA512 behind helper,,,,,,
+corpus/tier1_library_indirect/IndPbkdf2.java,java,true,PBKDF2,kdf,no,1,synth,authored,SecretKeyFactory PBKDF2 via config,,,,,,
+corpus/tier1_library_indirect/IndRsaFactory.java,java,true,RSA,asymmetric,yes,1,synth,authored,Cipher RSA via factory method (Shor),,,,,,
+corpus/tier1_library_indirect/IndSha512Reflect.java,java,true,SHA-512,hash,no,1,synth,authored,MessageDigest via reflection-ish name lookup,,,,,,
+corpus/tier1_library_indirect/aes_via_wrapper.py,python,true,AES-GCM,symmetric,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/cipher_factory.go,go,true,AES,symmetric,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/hash_dispatch.py,python,true,SHA-256,hash,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/ind_3des_wrapper.go,go,true,3DES,symmetric,no,1,synth,authored,crypto/des EDE3 behind wrapper,,,,,,
+corpus/tier1_library_indirect/ind_aescbc_wrapper.py,python,true,AES-CBC,symmetric,no,1,synth,authored,pyca AES-CBC via aliased import + wrapper fn,,,,,,
+corpus/tier1_library_indirect/ind_aesctr_dispatch.py,python,true,AES-CTR,symmetric,no,1,synth,authored,pyca AES-CTR chosen via a mode-dispatch dict,,,,,,
+corpus/tier1_library_indirect/ind_aesgcm_reflect.py,python,true,AES-GCM,symmetric,no,1,synth,authored,pyca AESGCM via importlib,,,,,,
+corpus/tier1_library_indirect/ind_blake2_wrapper.py,python,true,BLAKE2b,hash,no,1,synth,authored,hashlib.blake2b behind wrapper,,,,,,
+corpus/tier1_library_indirect/ind_chacha_factory.py,python,true,ChaCha20,symmetric,no,1,synth,authored,pyca ChaCha20 via factory function,,,,,,
+corpus/tier1_library_indirect/ind_cmac_wrapper.go,go,true,CMAC,mac,no,1,synth,authored,x/crypto/... CMAC-like via wrapper (use a mac lib),,,,,,
+corpus/tier1_library_indirect/ind_ecdsa_module.py,python,true,ECDSA,asymmetric,yes,1,synth,authored,pyca ECDSA via module-level indirection (Shor),,,,,,
+corpus/tier1_library_indirect/ind_ed25519_iface.go,go,true,Ed25519,asymmetric,yes,1,synth,authored,ed25519 via crypto.Signer interface (Shor),,,,,,
+corpus/tier1_library_indirect/ind_evp_sha512.c,c,true,SHA-512,hash,no,1,synth,authored,OpenSSL EVP SHA-512 via wrapper,,,,,,
+corpus/tier1_library_indirect/ind_hkdf_wrapper.go,go,true,HKDF,kdf,no,1,synth,authored,x/crypto/hkdf behind wrapper,,,,,,
+corpus/tier1_library_indirect/ind_hkdf_wrapper.py,python,true,HKDF,kdf,no,1,synth,authored,pyca HKDF behind derive() wrapper,,,,,,
+corpus/tier1_library_indirect/ind_hmac512_wrapper.py,python,true,HMAC-SHA512,mac,no,1,synth,authored,hmac behind a helper,,,,,,
+corpus/tier1_library_indirect/ind_rsa_oaep_alias.py,python,true,RSA-OAEP,asymmetric,yes,1,synth,authored,"pyca RSA-OAEP, aliased modules",,,,,,
+corpus/tier1_library_indirect/ind_scrypt_alias.py,python,true,scrypt,kdf,no,1,synth,authored,hashlib.scrypt aliased,,,,,,
+corpus/tier1_library_indirect/ind_sha3_alias.go,go,true,SHA3-256,hash,no,1,synth,authored,x/crypto/sha3 aliased,,,,,,
+corpus/tier1_library_indirect/ind_sha512_factory.go,go,true,SHA-512,hash,no,1,synth,authored,crypto/sha512 via hash.Hash factory,,,,,,
+corpus/tier1_library_indirect/kdf_alias.py,python,true,PBKDF2,kdf,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/rsa_indirect.go,go,true,RSA,asymmetric,yes,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/signer_iface.go,go,true,ECDSA,asymmetric,yes,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/tier1_library_indirect/ssl_wrapped.c,c,true,AES,symmetric,no,1,synth,authored,slice-1 indirection fixture,,,,,,
+corpus/_dev/tier2_handrolled_textbook/RsaTextbookN1.java,java,true,RSA,asymmetric,yes,2,novel,derived:RsaTextbook.java,light mutation,,,,,,
+corpus/_dev/tier2_handrolled_textbook/aes_bcon_n1.c,c,true,AES,symmetric,no,2,novel,derived:aes_bcon.c,light mutation,,,,,,
+corpus/_dev/tier2_handrolled_textbook/md5_bcon_n1.c,c,true,MD5,hash,no,2,novel,derived:md5_bcon.c,light mutation,,,,,,
+corpus/_dev/tier2_handrolled_textbook/rc4_bcon_n1.c,c,true,RC4,symmetric,no,2,novel,derived:rc4_bcon.c,light mutation,,,,,,
+corpus/_dev/tier2_handrolled_textbook/rsa_textbook_n2.py,python,true,RSA,asymmetric,yes,2,novel,derived:rsa_textbook.py,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/RsaTextbookN2.java,java,true,RSA,asymmetric,yes,2,novel,derived:RsaTextbook.java,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/Sha1ScratchN1.java,java,true,SHA-1,hash,no,2,novel,derived:Sha1Scratch.java,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/Sha1ScratchN2.java,java,true,SHA-1,hash,no,2,novel,derived:Sha1Scratch.java,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/Sha256ScratchN1.java,java,true,SHA-256,hash,no,2,novel,derived:Sha256Scratch.java,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/blowfish_bcon_n1.c,c,true,Blowfish,symmetric,no,2,novel,derived:blowfish_bcon.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/des_bcon_n1.c,c,true,DES,symmetric,no,2,novel,derived:des_bcon.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/md2_bcon_n1.c,c,true,MD2,hash,no,2,novel,derived:md2_bcon.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/md4_scratch_n1.c,c,true,MD4,hash,no,2,novel,derived:md4_scratch.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/md5_scratch_n1.go,go,true,MD5,hash,no,2,novel,derived:md5_scratch.go,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/md5_scratch_n1.py,python,true,MD5,hash,no,2,novel,derived:md5_scratch.py,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/md5_scratch_n2.go,go,true,MD5,hash,no,2,novel,derived:md5_scratch.go,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/md5_scratch_n2.py,python,true,MD5,hash,no,2,novel,derived:md5_scratch.py,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook_n1.c,c,true,RSA,asymmetric,yes,2,novel,derived:rsa_textbook.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook_n1.go,go,true,RSA,asymmetric,yes,2,novel,derived:rsa_textbook.go,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook_n1.py,python,true,RSA,asymmetric,yes,2,novel,derived:rsa_textbook.py,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook_n2.go,go,true,RSA,asymmetric,yes,2,novel,derived:rsa_textbook.go,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/sha1_bcon_n1.c,c,true,SHA-1,hash,no,2,novel,derived:sha1_bcon.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/sha256_bcon_n1.c,c,true,SHA-256,hash,no,2,novel,derived:sha256_bcon.c,light mutation,,,,,,
+corpus/tier2_handrolled_textbook/RsaTextbook.java,java,true,RSA,asymmetric,yes,2,public,https://rosettacode.org/wiki/RSA_code,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/Sha1Scratch.java,java,true,SHA-1,hash,no,2,public,https://rosettacode.org/wiki/SHA-1,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/Sha256Scratch.java,java,true,SHA-256,hash,no,2,public,https://rosettacode.org/wiki/SHA-256,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/aes_bcon.c,c,true,AES,symmetric,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/aes.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/blowfish_bcon.c,c,true,Blowfish,symmetric,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/blowfish.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/des_bcon.c,c,true,DES,symmetric,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/des.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/md2_bcon.c,c,true,MD2,hash,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/md2.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/md4_scratch.c,c,true,MD4,hash,no,2,public,https://rosettacode.org/wiki/MD4,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/md5_bcon.c,c,true,MD5,hash,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/md5.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/md5_scratch.go,go,true,MD5,hash,no,2,public,https://rosettacode.org/wiki/MD5/Implementation,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/md5_scratch.py,python,true,MD5,hash,no,2,public,https://rosettacode.org/wiki/MD5/Implementation,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/rc4_bcon.c,c,true,RC4,symmetric,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/arcfour.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook.c,c,true,RSA,asymmetric,yes,2,public,https://rosettacode.org/wiki/RSA_code,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook.go,go,true,RSA,asymmetric,yes,2,public,https://rosettacode.org/wiki/RSA_code,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/rsa_textbook.py,python,true,RSA,asymmetric,yes,2,public,https://rosettacode.org/wiki/RSA_code,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/sha1_bcon.c,c,true,SHA-1,hash,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/sha1.c,verbatim public seed,,,,,,
+corpus/tier2_handrolled_textbook/sha256_bcon.c,c,true,SHA-256,hash,no,2,public,https://raw.githubusercontent.com/B-Con/crypto-algorithms/master/sha256.c,verbatim public seed,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/RsaTextbookH1.java,java,true,RSA,asymmetric,yes,3,novel,derived:RsaTextbook.java,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/Sha1ScratchH3.java,java,true,SHA-1,hash,no,3,novel,derived:Sha1Scratch.java,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/blowfish_bcon_h1.c,c,true,Blowfish,symmetric,no,3,novel,derived:blowfish_bcon.c,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/md2_bcon_h2.c,c,true,MD2,hash,no,3,novel,derived:md2_bcon.c,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/md5_scratch_h1.go,go,true,MD5,hash,no,3,novel,derived:md5_scratch.go,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/md5_scratch_h3.py,python,true,MD5,hash,no,3,novel,derived:md5_scratch.py,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/rsa_textbook_h1.py,python,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.py,heavy mutation,,,,,,
+corpus/_dev/tier3_handrolled_obfuscated/rsa_textbook_h3.py,python,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.py,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/RsaTextbookH2.java,java,true,RSA,asymmetric,yes,3,novel,derived:RsaTextbook.java,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/RsaTextbookH3.java,java,true,RSA,asymmetric,yes,3,novel,derived:RsaTextbook.java,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/Sha1ScratchH1.java,java,true,SHA-1,hash,no,3,novel,derived:Sha1Scratch.java,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/Sha1ScratchH2.java,java,true,SHA-1,hash,no,3,novel,derived:Sha1Scratch.java,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/Sha256ScratchH1.java,java,true,SHA-256,hash,no,3,novel,derived:Sha256Scratch.java,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/Sha256ScratchH2.java,java,true,SHA-256,hash,no,3,novel,derived:Sha256Scratch.java,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/aes_bcon_h1.c,c,true,AES,symmetric,no,3,novel,derived:aes_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/aes_bcon_h2.c,c,true,AES,symmetric,no,3,novel,derived:aes_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/blowfish_bcon_h2.c,c,true,Blowfish,symmetric,no,3,novel,derived:blowfish_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/des_bcon_h1.c,c,true,DES,symmetric,no,3,novel,derived:des_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/des_bcon_h2.c,c,true,DES,symmetric,no,3,novel,derived:des_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md2_bcon_h1.c,c,true,MD2,hash,no,3,novel,derived:md2_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md4_scratch_h1.c,c,true,MD4,hash,no,3,novel,derived:md4_scratch.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md4_scratch_h2.c,c,true,MD4,hash,no,3,novel,derived:md4_scratch.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md5_bcon_h1.c,c,true,MD5,hash,no,3,novel,derived:md5_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md5_bcon_h2.c,c,true,MD5,hash,no,3,novel,derived:md5_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md5_scratch_h1.py,python,true,MD5,hash,no,3,novel,derived:md5_scratch.py,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md5_scratch_h2.go,go,true,MD5,hash,no,3,novel,derived:md5_scratch.go,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md5_scratch_h2.py,python,true,MD5,hash,no,3,novel,derived:md5_scratch.py,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/md5_scratch_h3.go,go,true,MD5,hash,no,3,novel,derived:md5_scratch.go,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rc4_bcon_h1.c,c,true,RC4,symmetric,no,3,novel,derived:rc4_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rc4_bcon_h2.c,c,true,RC4,symmetric,no,3,novel,derived:rc4_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rsa_textbook_h1.c,c,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rsa_textbook_h1.go,go,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.go,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rsa_textbook_h2.c,c,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rsa_textbook_h2.go,go,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.go,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rsa_textbook_h2.py,python,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.py,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/rsa_textbook_h3.go,go,true,RSA,asymmetric,yes,3,novel,derived:rsa_textbook.go,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/sha1_bcon_h1.c,c,true,SHA-1,hash,no,3,novel,derived:sha1_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/sha1_bcon_h2.c,c,true,SHA-1,hash,no,3,novel,derived:sha1_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/sha256_bcon_h1.c,c,true,SHA-256,hash,no,3,novel,derived:sha256_bcon.c,heavy mutation,,,,,,
+corpus/tier3_handrolled_obfuscated/sha256_bcon_h2.c,c,true,SHA-256,hash,no,3,novel,derived:sha256_bcon.c,heavy mutation,,,,,,
+corpus/_dev/tier4_handrolled_novel/RawElgamal.java,java,true,ElGamal,asymmetric,yes,4,synth,authored,hand-rolled ElGamal (Shor),,,,,,
+corpus/_dev/tier4_handrolled_novel/RawSpn2.java,java,true,custom-SPN,symmetric,no,4,synth,authored,"bespoke SPN cipher, different S-box",,,,,,
+corpus/_dev/tier4_handrolled_novel/arx_cipher.py,python,true,custom-ARX,symmetric,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/_dev/tier4_handrolled_novel/modexp_dh.c,c,true,DH,asymmetric,yes,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/_dev/tier4_handrolled_novel/raw_dh_modp.go,go,true,DH,asymmetric,yes,4,synth,authored,hand-rolled finite-field Diffie-Hellman (Shor),,,,,,
+corpus/_dev/tier4_handrolled_novel/raw_lfsr_fib.go,go,true,custom-LFSR,symmetric,no,4,synth,authored,Fibonacci LFSR keystream cipher,,,,,,
+corpus/_dev/tier4_handrolled_novel/raw_rabin_go.go,go,true,Rabin,asymmetric,yes,4,synth,authored,hand-rolled Rabin in Go (Shor),,,,,,
+corpus/_dev/tier4_handrolled_novel/raw_tea.c,c,true,TEA,symmetric,no,4,synth,authored,hand-rolled TEA in C,,,,,,
+corpus/_dev/tier4_handrolled_novel/sponge_hash.py,python,true,custom-sponge,hash,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/RawFeistel2.java,java,true,custom-feistel,symmetric,no,4,synth,authored,"bespoke Feistel cipher, different round fn",,,,,,
+corpus/tier4_handrolled_novel/RawKeyedSponge.java,java,true,custom-keyed-hash,mac,no,4,synth,authored,keyed sponge MAC,,,,,,
+corpus/tier4_handrolled_novel/RawMd6Like.java,java,true,custom-MD-hash,hash,no,4,synth,authored,"Merkle-Damgard hash, bespoke compression",,,,,,
+corpus/tier4_handrolled_novel/RawRsaPlain.java,java,true,RSA,asymmetric,yes,4,synth,authored,library-less RSA via BigInteger (Shor),,,,,,
+corpus/tier4_handrolled_novel/RawStreamArx.java,java,true,custom-ARX,symmetric,no,4,synth,authored,ARX stream cipher,,,,,,
+corpus/tier4_handrolled_novel/RawXtea.java,java,true,XTEA,symmetric,no,4,synth,authored,hand-rolled XTEA,,,,,,
+corpus/tier4_handrolled_novel/SpnBlock.java,java,true,custom-SPN,symmetric,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/XorRotHash.java,java,true,custom-keyed-hash,mac,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/ecc_affine.go,go,true,ECC,asymmetric,yes,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/feistel_mixer.go,go,true,custom-feistel,symmetric,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/lfsr_stream.c,c,true,custom-LFSR,symmetric,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/merkle_damgard.go,go,true,custom-MD-hash,hash,no,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/tier4_handrolled_novel/raw_addrot_mac.go,go,true,custom-MAC,mac,no,4,synth,authored,add-rotate keyed MAC,,,,,,
+corpus/tier4_handrolled_novel/raw_affine_block.py,python,true,custom-block,symmetric,no,4,synth,authored,bespoke affine/mix block cipher,,,,,,
+corpus/tier4_handrolled_novel/raw_cbcmac.py,python,true,CBC-MAC,mac,no,4,synth,authored,hand-rolled CBC-MAC over a toy block cipher,,,,,,
+corpus/tier4_handrolled_novel/raw_dh.c,c,true,DH,asymmetric,yes,4,synth,authored,hand-rolled DH in C (Shor),,,,,,
+corpus/tier4_handrolled_novel/raw_ecc_proj.go,go,true,ECC,asymmetric,yes,4,synth,authored,hand-rolled ECC in projective coords (Shor),,,,,,
+corpus/tier4_handrolled_novel/raw_elgamal.py,python,true,ElGamal,asymmetric,yes,4,synth,authored,hand-rolled ElGamal encryption (Shor-breakable),,,,,,
+corpus/tier4_handrolled_novel/raw_hmac_scratch.py,python,true,HMAC,mac,no,4,synth,authored,HMAC built from a hand-rolled compression fn,,,,,,
+corpus/tier4_handrolled_novel/raw_lai_massey.py,python,true,Lai-Massey,symmetric,no,4,synth,authored,bespoke Lai-Massey block cipher,,,,,,
+corpus/tier4_handrolled_novel/raw_merkle_tree.py,python,true,custom-MD-hash,hash,no,4,synth,authored,binary Merkle hash tree over a bespoke hash,,,,,,
+corpus/tier4_handrolled_novel/raw_paillier.go,go,true,Paillier,asymmetric,yes,4,synth,authored,"hand-rolled Paillier (factoring-based, Shor)",,,,,,
+corpus/tier4_handrolled_novel/raw_pohlig.py,python,true,Pohlig-Hellman,symmetric,no,4,synth,authored,Pohlig-Hellman exponentiation cipher,,,,,,
+corpus/tier4_handrolled_novel/raw_rabin.py,python,true,Rabin,asymmetric,yes,4,synth,authored,hand-rolled Rabin cryptosystem (Shor-breakable),,,,,,
+corpus/tier4_handrolled_novel/raw_rc4.c,c,true,RC4-like,symmetric,no,4,synth,authored,RC4-style stream cipher in C,,,,,,
+corpus/tier4_handrolled_novel/raw_rc4_stream.py,python,true,RC4-like,symmetric,no,4,synth,authored,hand-rolled RC4-style KSA/PRGA stream cipher,,,,,,
+corpus/tier4_handrolled_novel/raw_speck_like.go,go,true,custom-ARX-Speck,symmetric,no,4,synth,authored,Speck-like ARX block cipher (hand-rolled),,,,,,
+corpus/tier4_handrolled_novel/raw_sponge2.go,go,true,custom-sponge,hash,no,4,synth,authored,"bespoke sponge hash, different permutation",,,,,,
+corpus/tier4_handrolled_novel/raw_tea_cipher.py,python,true,TEA,symmetric,no,4,synth,authored,"hand-rolled TEA block cipher (delta sum, 32 rounds)",,,,,,
+corpus/tier4_handrolled_novel/raw_xtea.c,c,true,XTEA,symmetric,no,4,synth,authored,hand-rolled XTEA in C,,,,,,
+corpus/tier4_handrolled_novel/raw_xtea_cipher.py,python,true,XTEA,symmetric,no,4,synth,authored,hand-rolled XTEA block cipher,,,,,,
+corpus/tier4_handrolled_novel/rsa_crt_obscure.py,python,true,RSA,asymmetric,yes,4,synth,authored,slice-1 bespoke fixture,,,,,,
+corpus/_dev/tier5_unrecognizable/BrHmacTrunc.java,java,true,HMAC,mac,no,5,novel,derived:HMAC,HMAC keyed with only the first byte of the key,7,HMAC keyed with only the first byte of the key,true,,true,true
+corpus/_dev/tier5_unrecognizable/br_rsa_e_one.py,python,true,RSA,asymmetric,yes,5,novel,derived:RSA,RSA with public exponent 1 (no real encryption) — still the RSA construction,7,RSA with public exponent 1 (no real encryption) — still the RSA construction,true,,true,true
+corpus/_dev/tier5_unrecognizable/co_rc4_ksa.go,go,true,RC4,symmetric,no,5,novel,derived:RC4,RC4 key schedule with no identifying literal,4,RC4 key schedule with no identifying literal,true,,true,true
+corpus/_dev/tier5_unrecognizable/t5_ctr_keystream.py,python,true,CTR-keystream,symmetric,no,5,novel,derived:CTR-keystream,"generates a keystream by encrypting an incrementing counter, then xors — CTR mode",1,"generates a keystream by encrypting an incrementing counter, then xors — CTR mode",false,,true,true
+corpus/tier5_unrecognizable/BrRc4Weak.java,java,true,RC4,symmetric,no,5,novel,derived:RC4,RC4 with no key-stream drop (weak KSA start),7,RC4 with no key-stream drop (weak KSA start),true,,true,true
+corpus/tier5_unrecognizable/CoChachaConst.java,java,true,ChaCha20,symmetric,no,5,novel,derived:ChaCha20,ChaCha with its 'expand 32-byte k' constant encoded,4,ChaCha with its 'expand 32-byte k' constant encoded,true,,true,true
+corpus/tier5_unrecognizable/CoTeaDelta.java,java,true,TEA,symmetric,no,5,novel,derived:TEA,TEA whose delta constant is assembled arithmetically,4,TEA whose delta constant is assembled arithmetically,true,,true,true
+corpus/tier5_unrecognizable/T5KeyExpand.java,java,true,key-schedule,symmetric,no,5,novel,derived:key-schedule,expands a short key into many round subkeys via rotate+sbox+rcon — unmistakably a block-cipher key schedule,1,expands a short key into many round subkeys via rotate+sbox+rcon — unmistakably a block-cipher key schedule,false,,true,true
+corpus/tier5_unrecognizable/T5RoundLoop.java,java,true,round-loop,symmetric,no,5,novel,derived:round-loop,iterates key-whitening + nonlinear round over a state array — the body of a block cipher,1,iterates key-whitening + nonlinear round over a state array — the body of a block cipher,false,,true,true
+corpus/tier5_unrecognizable/br_cbc_fixed_iv.py,python,true,AES-CBC,symmetric,no,5,novel,derived:AES-CBC,CBC with a hardcoded zero IV,7,CBC with a hardcoded zero IV,true,,true,true
+corpus/tier5_unrecognizable/br_ctr_reuse.go,go,true,AES-CTR,symmetric,no,5,novel,derived:AES-CTR,CTR keystream with a counter that resets each call (nonce reuse),7,CTR keystream with a counter that resets each call (nonce reuse),true,,true,true
+corpus/tier5_unrecognizable/br_dh_small.go,go,true,DH,asymmetric,yes,5,novel,derived:DH,Diffie-Hellman with a tiny modulus,7,Diffie-Hellman with a tiny modulus,true,,true,true
+corpus/tier5_unrecognizable/br_ecb_mode.c,c,true,AES,symmetric,no,5,novel,derived:AES,"AES used in ECB where CBC was intended — still AES, a mode weakness",7,"AES used in ECB where CBC was intended — still AES, a mode weakness",true,,true,true
+corpus/tier5_unrecognizable/br_sha_rounds.c,c,true,SHA-256,hash,no,5,novel,derived:SHA-256,SHA-256 with 56 rounds instead of 64,7,SHA-256 with 56 rounds instead of 64,true,,true,true
+corpus/tier5_unrecognizable/co_aes_sbox_runtime.c,c,true,AES,symmetric,no,5,novel,derived:AES,"AES whose S-box is computed at runtime, not a literal table",4,"AES whose S-box is computed at runtime, not a literal table",true,,true,true
+corpus/tier5_unrecognizable/co_blowfish_pi.py,python,true,Blowfish,symmetric,no,5,novel,derived:Blowfish,Blowfish P-array seeded from pi digits at runtime,4,Blowfish P-array seeded from pi digits at runtime,true,,true,true
+corpus/tier5_unrecognizable/co_md5_ttable.go,go,true,MD5,hash,no,5,novel,derived:MD5,MD5 with its T-table generated from sin() at runtime,4,MD5 with its T-table generated from sin() at runtime,true,,true,true
+corpus/tier5_unrecognizable/co_sha1_k.c,c,true,SHA-1,hash,no,5,novel,derived:SHA-1,"SHA-1 whose four K constants are computed, not literal",4,"SHA-1 whose four K constants are computed, not literal",true,,true,true
+corpus/tier5_unrecognizable/co_sha256_constants.py,python,true,SHA-256,hash,no,5,novel,derived:SHA-256,SHA-256 with round constants computed from prime cube roots,4,SHA-256 with round constants computed from prime cube roots,true,,true,true
+corpus/tier5_unrecognizable/t5_block_decrypt.c,c,true,block-decrypt,symmetric,no,5,novel,derived:block-decrypt,inverse round function with inverse sbox and key subtraction — a block cipher decrypt path,1,inverse round function with inverse sbox and key subtraction — a block cipher decrypt path,false,,true,true
+corpus/tier5_unrecognizable/t5_cbc_wrap.go,go,true,CBC-mode,symmetric,no,5,novel,derived:CBC-mode,chains fixed-size blocks with xor feedback around an opaque block transform — CBC mode of operation,1,chains fixed-size blocks with xor feedback around an opaque block transform — CBC mode of operation,false,,true,true
+corpus/tier5_unrecognizable/t5_cipher_round.py,python,true,cipher-round,symmetric,no,5,novel,derived:cipher-round,"one substitution-permutation round: sbox, bit permutation, subkey add — a cipher primitive",1,"one substitution-permutation round: sbox, bit permutation, subkey add — a cipher primitive",false,,true,true
+corpus/tier5_unrecognizable/t5_ipad_opad.go,go,true,hmac-construction,mac,no,5,novel,derived:hmac-construction,wraps an opaque hash with inner/outer key-pad passes — the HMAC construction,1,wraps an opaque hash with inner/outer key-pad passes — the HMAC construction,false,,true,true
+corpus/tier5_unrecognizable/t5_poly_mac_step.c,c,true,poly-mac-step,mac,no,5,novel,derived:poly-mac-step,multiply-accumulate of message blocks in a binary field under a secret point — a polynomial MAC core,1,multiply-accumulate of message blocks in a binary field under a secret point — a polynomial MAC core,false,,true,true
+corpus/_dev/tier5_unrecognizable/D2ColumnPack.java,java,true,custom-cipher,symmetric,no,5,synth,authored,keyed stream transform over an export blob framed as 'column packing / serialization',2,keyed stream transform over an export blob framed as 'column packing / serialization',false,,true,true
+corpus/_dev/tier5_unrecognizable/HgArxWide.java,java,true,custom-cipher,symmetric,no,5,synth,authored,invented wide-block ARX cipher,3,invented wide-block ARX cipher,false,,true,true
+corpus/_dev/tier5_unrecognizable/RvIvSource.java,java,review,Mersenne Twister,rng,na,5,synth,authored,MT19937 used to make IVs — review,review,MT19937 used to make IVs — review,false,,,
+corpus/_dev/tier5_unrecognizable/audit_tag.py,python,true,custom-mac,mac,no,5,synth,authored,CBC-MAC over log lines presented as an audit checksum,2,CBC-MAC over log lines presented as an audit checksum,false,,true,true
+corpus/_dev/tier5_unrecognizable/d2_audit_seq.py,python,true,custom-mac,mac,no,5,synth,authored,keyed chained MAC framed as an 'audit sequence number' generator,2,keyed chained MAC framed as an 'audit sequence number' generator,false,,true,true
+corpus/_dev/tier5_unrecognizable/d2_row_version.py,python,true,custom-mac,mac,no,5,synth,authored,keyed MAC over DB row bytes presented as a plain 'row version checksum' amid ORM bookkeeping,2,keyed MAC over DB row bytes presented as a plain 'row version checksum' amid ORM bookkeeping,false,,true,true
+corpus/_dev/tier5_unrecognizable/dc_consistent_hash.go,go,false,consistent hashing,none,na,5,synth,authored,hash ring for shard placement; non-crypto,decoy,hash ring for shard placement; non-crypto,false,,false,false
+corpus/_dev/tier5_unrecognizable/dc_rolling_dedup.py,python,false,rolling hash,none,na,5,synth,authored,"content-defined chunking rolling hash for dedup; keyless, collisions fine",decoy,"content-defined chunking rolling hash for dedup; keyless, collisions fine",false,,false,false
+corpus/_dev/tier5_unrecognizable/hg_double_mix.c,c,true,custom-cipher,symmetric,no,5,synth,authored,invented two-layer substitution-rotation cipher,3,invented two-layer substitution-rotation cipher,false,,true,true
+corpus/_dev/tier5_unrecognizable/hg_stateful_stream.py,python,true,custom-cipher,symmetric,no,5,synth,authored,invented self-modifying stream cipher,3,invented self-modifying stream cipher,false,,true,true
+corpus/_dev/tier5_unrecognizable/ml_cipher_text.go,go,false,,none,na,5,synth,authored,CipherText() is run-length encoding; not crypto,5,CipherText() is run-length encoding; not crypto,false,,false,false
+corpus/_dev/tier5_unrecognizable/ml_serialize.c,c,true,RSA,asymmetric,yes,5,synth,authored,serialize() actually performs an RSA signature,5,serialize() actually performs an RSA signature,true,,true,true
+corpus/_dev/tier5_unrecognizable/rv_prng_keygen.py,python,review,LCG,rng,na,5,synth,authored,non-crypto LCG used to generate a 'session key' — surface for review,review,non-crypto LCG used to generate a 'session key' — surface for review,false,,,
+corpus/_dev/tier5_unrecognizable/up_coroutine_ks.py,python,true,custom-cipher,symmetric,no,5,synth,authored,generator/coroutine keystream cipher,6,generator/coroutine keystream cipher,false,,true,true
+corpus/_dev/tier5_unrecognizable/up_xor_stream.sh,shell,true,custom-cipher,symmetric,no,5,synth,authored,POSIX shell keyed xor cipher,6,POSIX shell keyed xor cipher,false,,true,true
+corpus/tier5_unrecognizable/ConfigVault.java,java,true,custom-cipher,symmetric,no,5,synth,authored,Feistel over a config blob framed as config storage,2,Feistel over a config blob framed as config storage,false,,true,true
+corpus/tier5_unrecognizable/D2ConfigValidate.java,java,true,custom-mac,mac,no,5,synth,authored,keyed integrity tag over config framed as a 'config validation checksum',2,keyed integrity tag over config framed as a 'config validation checksum',false,,true,true
+corpus/tier5_unrecognizable/DcHyperLogLog.java,java,false,HyperLogLog,none,na,5,synth,authored,cardinality estimation using a non-crypto hash,decoy,cardinality estimation using a non-crypto hash,false,,false,false
+corpus/tier5_unrecognizable/DcMonteCarlo.java,java,false,simulation PRNG,none,na,5,synth,authored,"PRNG explicitly for Monte Carlo simulation, not security",decoy,"PRNG explicitly for Monte Carlo simulation, not security",false,,false,false
+corpus/tier5_unrecognizable/DcRotChecksum.java,java,false,rotating checksum,none,na,5,synth,authored,keyless rotate-add checksum that looks MAC-like,decoy,keyless rotate-add checksum that looks MAC-like,false,,false,false
+corpus/tier5_unrecognizable/DjCore.java,java,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group gg_java: assembles the round-based cipher,8,fragment of composed cipher group gg_java: assembles the round-based cipher,false,gg_java,,
+corpus/tier5_unrecognizable/DjKey.java,java,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group gg_java: derives round keys,8,fragment of composed cipher group gg_java: derives round keys,false,gg_java,,
+corpus/tier5_unrecognizable/DjPerm.java,java,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group gg_java: diffusion permutation over a block,8,fragment of composed cipher group gg_java: diffusion permutation over a block,false,gg_java,,
+corpus/tier5_unrecognizable/DjSub.java,java,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group gg_java: constructs a substitution table,8,fragment of composed cipher group gg_java: constructs a substitution table,false,gg_java,,
+corpus/tier5_unrecognizable/FjCore.java,java,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group fg_java: assembles the round-based transform,8,fragment of composed cipher group fg_java: assembles the round-based transform,false,fg_java,,
+corpus/tier5_unrecognizable/FjKey.java,java,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group fg_java: derives round values,8,fragment of composed cipher group fg_java: derives round values,false,fg_java,,
+corpus/tier5_unrecognizable/FjMix.java,java,true,diffusion,symmetric,no,5,synth,authored,fragment of composed cipher group fg_java: linear mixing over a block,8,fragment of composed cipher group fg_java: linear mixing over a block,false,fg_java,,
+corpus/tier5_unrecognizable/FjPerm.java,java,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group fg_java: reorders block bytes,8,fragment of composed cipher group fg_java: reorders block bytes,false,fg_java,,
+corpus/tier5_unrecognizable/FjSbox.java,java,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group fg_java: constructs a substitution table,8,fragment of composed cipher group fg_java: constructs a substitution table,false,fg_java,,
+corpus/tier5_unrecognizable/HgFeistelOdd.java,java,true,custom-cipher,symmetric,no,5,synth,authored,invented Feistel with a nonstandard round fn and count,3,invented Feistel with a nonstandard round fn and count,false,,true,true
+corpus/tier5_unrecognizable/HgKeyedMix.java,java,true,custom-mac,mac,no,5,synth,authored,invented keyed hash / MAC,3,invented keyed hash / MAC,false,,true,true
+corpus/tier5_unrecognizable/MlChecksum.java,java,true,HMAC,mac,no,5,synth,authored,checksum() is actually a keyed HMAC,5,checksum() is actually a keyed HMAC,true,,true,true
+corpus/tier5_unrecognizable/MlSecureHash.java,java,false,,none,na,5,synth,authored,SecureHash class is just djb2; non-crypto hash,5,SecureHash class is just djb2; non-crypto hash,false,,false,false
+corpus/tier5_unrecognizable/SplitBlockMix.java,java,true,cipher-round,symmetric,no,5,synth,authored,fragment of composed cipher group g_java_cipher: nonlinear + linear round transform on a block,8,fragment of composed cipher group g_java_cipher: nonlinear + linear round transform on a block,false,g_java_cipher,,
+corpus/tier5_unrecognizable/SplitKeyDeriv.java,java,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group g_java_cipher: derives round keys for the cipher,8,fragment of composed cipher group g_java_cipher: derives round keys for the cipher,false,g_java_cipher,,
+corpus/tier5_unrecognizable/SplitSeal.java,java,true,CTR-mode,symmetric,no,5,synth,authored,fragment of composed cipher group g_java_cipher: produces a keystream from the round transform and xors data,8,fragment of composed cipher group g_java_cipher: produces a keystream from the round transform and xors data,false,g_java_cipher,,
+corpus/tier5_unrecognizable/UpRecursiveHash.java,java,true,custom-hash,hash,no,5,synth,authored,recursive/continuation-style compression hash,6,recursive/continuation-style compression hash,false,,true,true
+corpus/tier5_unrecognizable/cookie_seal.go,go,true,custom-cipher,symmetric,no,5,synth,authored,keyed transform on cookies framed as cookie management,2,keyed transform on cookies framed as cookie management,false,,true,true
+corpus/tier5_unrecognizable/coupon_signer.go,go,true,custom-mac,mac,no,5,synth,authored,homemade keyed hash presented as coupon validation,2,homemade keyed hash presented as coupon validation,false,,true,true
+corpus/tier5_unrecognizable/d2_cache_salt.go,go,true,custom-kdf,kdf,no,5,synth,authored,keyed derivation framed as 'cache key salting' in a caching layer,2,keyed derivation framed as 'cache key salting' in a caching layer,false,,true,true
+corpus/tier5_unrecognizable/d2_dedup_key.c,c,true,custom-mac,mac,no,5,synth,authored,keyed hash over an event framed as a 'dedup key' in an ingestion pipeline,2,keyed hash over an event framed as a 'dedup key' in an ingestion pipeline,false,,true,true
+corpus/tier5_unrecognizable/d2_idempotency.go,go,true,custom-mac,mac,no,5,synth,authored,keyed request MAC framed as an 'idempotency key' inside an HTTP handler,2,keyed request MAC framed as an 'idempotency key' inside an HTTP handler,false,,true,true
+corpus/tier5_unrecognizable/d2_token_format.go,go,true,custom-cipher,symmetric,no,5,synth,authored,keyed transform framed as 'session token formatting',2,keyed transform framed as 'session token formatting',false,,true,true
+corpus/tier5_unrecognizable/d2_transport_encode.c,c,true,custom-cipher,symmetric,no,5,synth,authored,keyed stream framed as 'message encoding for transport',2,keyed stream framed as 'message encoding for transport',false,,true,true
+corpus/tier5_unrecognizable/dc_bloom.go,go,false,bloom filter,none,na,5,synth,authored,bloom-filter hash bank for set membership; non-crypto hashes,decoy,bloom-filter hash bank for set membership; non-crypto hashes,false,,false,false
+corpus/tier5_unrecognizable/dc_cas_key.go,go,false,content hash,none,na,5,synth,authored,content-addressable store key via non-crypto hash,decoy,content-addressable store key via non-crypto hash,false,,false,false
+corpus/tier5_unrecognizable/dc_crc_table.c,c,false,CRC-32 table,none,na,5,synth,authored,table-driven CRC error-detection checksum,decoy,table-driven CRC error-detection checksum,false,,false,false
+corpus/tier5_unrecognizable/dc_dhash.py,python,false,perceptual hash,none,na,5,synth,authored,image difference-hash for similarity; not crypto,decoy,image difference-hash for similarity; not crypto,false,,false,false
+corpus/tier5_unrecognizable/dc_geohash.py,python,false,geohash,none,na,5,synth,authored,interleaves lat/long bits into a base32 locator; encoding,decoy,interleaves lat/long bits into a base32 locator; encoding,false,,false,false
+corpus/tier5_unrecognizable/dc_reed_solomon.py,python,false,Reed-Solomon,none,na,5,synth,authored,"error-correcting code over GF(256): coding theory, not cryptography",decoy,"error-correcting code over GF(256): coding theory, not cryptography",false,,false,false
+corpus/tier5_unrecognizable/dc_sbox_checksum.c,c,false,table checksum,none,na,5,synth,authored,"checksum using an S-box-like table but keyless, not collision-resistant, not crypto",decoy,"checksum using an S-box-like table but keyless, not collision-resistant, not crypto",false,,false,false
+corpus/tier5_unrecognizable/dg_core.go,go,true,round-loop,symmetric,no,5,synth,authored,fragment of composed cipher group gg_go: whitening + rounds using the sibling pieces,8,fragment of composed cipher group gg_go: whitening + rounds using the sibling pieces,false,gg_go,,
+corpus/tier5_unrecognizable/dg_key.go,go,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group gg_go: derives round keys,8,fragment of composed cipher group gg_go: derives round keys,false,gg_go,,
+corpus/tier5_unrecognizable/dg_perm.go,go,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group gg_go: diffusion/mixing layer over a block,8,fragment of composed cipher group gg_go: diffusion/mixing layer over a block,false,gg_go,,
+corpus/tier5_unrecognizable/dg_sub.go,go,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group gg_go: generates a substitution table,8,fragment of composed cipher group gg_go: generates a substitution table,false,gg_go,,
+corpus/tier5_unrecognizable/dp_core.py,python,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group gg_py: assembles substitution + subkeys + permutation into round-based block processing,8,fragment of composed cipher group gg_py: assembles substitution + subkeys + permutation into round-based block processing,false,gg_py,,
+corpus/tier5_unrecognizable/dp_key.py,python,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group gg_py: expands a master key into round subkeys,8,fragment of composed cipher group gg_py: expands a master key into round subkeys,false,gg_py,,
+corpus/tier5_unrecognizable/dp_perm.py,python,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group gg_py: applies a fixed bit/byte diffusion permutation to a block,8,fragment of composed cipher group gg_py: applies a fixed bit/byte diffusion permutation to a block,false,gg_py,,
+corpus/tier5_unrecognizable/dp_sub.py,python,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group gg_py: builds a nonlinear byte-substitution table from a seed,8,fragment of composed cipher group gg_py: builds a nonlinear byte-substitution table from a seed,false,gg_py,,
+corpus/tier5_unrecognizable/ec_core.c,c,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group gg_c: combines the pieces into a block transform,8,fragment of composed cipher group gg_c: combines the pieces into a block transform,false,gg_c,,
+corpus/tier5_unrecognizable/ec_key.c,c,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group gg_c: expands round keys,8,fragment of composed cipher group gg_c: expands round keys,false,gg_c,,
+corpus/tier5_unrecognizable/ec_perm.c,c,true,diffusion,symmetric,no,5,synth,authored,fragment of composed cipher group gg_c: linear mixing over the state,8,fragment of composed cipher group gg_c: linear mixing over the state,false,gg_c,,
+corpus/tier5_unrecognizable/ec_sub.c,c,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group gg_c: fills a substitution table,8,fragment of composed cipher group gg_c: fills a substitution table,false,gg_c,,
+corpus/tier5_unrecognizable/fc_core.c,c,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group fg_c: combines the pieces into a block transform,8,fragment of composed cipher group fg_c: combines the pieces into a block transform,false,fg_c,,
+corpus/tier5_unrecognizable/fc_isbox.c,c,true,inverse-sbox,symmetric,no,5,synth,authored,fragment of composed cipher group fg_c: fills the inverse substitution table,8,fragment of composed cipher group fg_c: fills the inverse substitution table,false,fg_c,,
+corpus/tier5_unrecognizable/fc_mix.c,c,true,diffusion,symmetric,no,5,synth,authored,fragment of composed cipher group fg_c: xtime-based linear mixing of the state,8,fragment of composed cipher group fg_c: xtime-based linear mixing of the state,false,fg_c,,
+corpus/tier5_unrecognizable/fc_perm.c,c,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group fg_c: reorders state bytes,8,fragment of composed cipher group fg_c: reorders state bytes,false,fg_c,,
+corpus/tier5_unrecognizable/fc_sbox.c,c,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group fg_c: fills a substitution table,8,fragment of composed cipher group fg_c: fills a substitution table,false,fg_c,,
+corpus/tier5_unrecognizable/fg_core.go,go,true,round-loop,symmetric,no,5,synth,authored,fragment of composed cipher group fg_go: runs whitening + rounds using the siblings,8,fragment of composed cipher group fg_go: runs whitening + rounds using the siblings,false,fg_go,,
+corpus/tier5_unrecognizable/fg_key.go,go,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group fg_go: expands a key into round values,8,fragment of composed cipher group fg_go: expands a key into round values,false,fg_go,,
+corpus/tier5_unrecognizable/fg_mix.go,go,true,diffusion,symmetric,no,5,synth,authored,fragment of composed cipher group fg_go: linear mixing layer over the block state,8,fragment of composed cipher group fg_go: linear mixing layer over the block state,false,fg_go,,
+corpus/tier5_unrecognizable/fg_perm.go,go,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group fg_go: applies a fixed byte-reordering to a block,8,fragment of composed cipher group fg_go: applies a fixed byte-reordering to a block,false,fg_go,,
+corpus/tier5_unrecognizable/fg_sbox.go,go,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group fg_go: generates a substitution table,8,fragment of composed cipher group fg_go: generates a substitution table,false,fg_go,,
+corpus/tier5_unrecognizable/firmware_stamp.c,c,true,custom-mac,mac,no,5,synth,authored,keyed checksum-as-MAC in a firmware updater,2,keyed checksum-as-MAC in a firmware updater,false,,true,true
+corpus/tier5_unrecognizable/fp_core.py,python,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group fg_py: assembles table + permute + mix + subkeys into rounds,8,fragment of composed cipher group fg_py: assembles table + permute + mix + subkeys into rounds,false,fg_py,,
+corpus/tier5_unrecognizable/fp_isbox.py,python,true,inverse-sbox,symmetric,no,5,synth,authored,fragment of composed cipher group fg_py: builds the inverse of the substitution table,8,fragment of composed cipher group fg_py: builds the inverse of the substitution table,false,fg_py,,
+corpus/tier5_unrecognizable/fp_mix.py,python,true,diffusion,symmetric,no,5,synth,authored,fragment of composed cipher group fg_py: linear inter-byte mixing pass over a block,8,fragment of composed cipher group fg_py: linear inter-byte mixing pass over a block,false,fg_py,,
+corpus/tier5_unrecognizable/fp_perm.py,python,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group fg_py: reorders the bytes of a block by a fixed pattern,8,fragment of composed cipher group fg_py: reorders the bytes of a block by a fixed pattern,false,fg_py,,
+corpus/tier5_unrecognizable/fp_sbox.py,python,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group fg_py: builds a nonlinear byte-substitution table from a seed value,8,fragment of composed cipher group fg_py: builds a nonlinear byte-substitution table from a seed value,false,fg_py,,
+corpus/tier5_unrecognizable/hg_chaotic_stream.py,python,true,custom-cipher,symmetric,no,5,synth,authored,"keystream from a chaotic map, keyed seed",3,"keystream from a chaotic map, keyed seed",false,,true,true
+corpus/tier5_unrecognizable/hg_confuse_diffuse.py,python,true,custom-cipher,symmetric,no,5,synth,authored,"invented keyed confusion-diffusion cipher, no textbook match",3,"invented keyed confusion-diffusion cipher, no textbook match",false,,true,true
+corpus/tier5_unrecognizable/hg_kdf_tree.py,python,true,custom-kdf,kdf,no,5,synth,authored,invented tree-structured KDF,3,invented tree-structured KDF,false,,true,true
+corpus/tier5_unrecognizable/hg_lai_massey_ish.go,go,true,custom-cipher,symmetric,no,5,synth,authored,invented Lai-Massey-flavored cipher (do not name it),3,invented Lai-Massey-flavored cipher (do not name it),false,,true,true
+corpus/tier5_unrecognizable/hg_perm_stream.go,go,true,custom-cipher,symmetric,no,5,synth,authored,invented stream cipher from a key-derived permutation walk,3,invented stream cipher from a key-derived permutation walk,false,,true,true
+corpus/tier5_unrecognizable/hg_sponge_mix.c,c,true,custom-hash,hash,no,5,synth,authored,invented sponge hash with a bespoke permutation,3,invented sponge hash with a bespoke permutation,false,,true,true
+corpus/tier5_unrecognizable/hg_wideblock.go,go,true,custom-cipher,symmetric,no,5,synth,authored,invented wide-block mixing cipher,3,invented wide-block mixing cipher,false,,true,true
+corpus/tier5_unrecognizable/invoice_token.py,python,true,custom-cipher,symmetric,no,5,synth,authored,keyed stream xor disguised as invoice-token issuance,2,keyed stream xor disguised as invoice-token issuance,false,,true,true
+corpus/tier5_unrecognizable/license_seal.go,go,true,custom-cipher,symmetric,no,5,synth,authored,homegrown keyed stream cipher named as license sealing,2,homegrown keyed stream cipher named as license sealing,false,,true,true
+corpus/tier5_unrecognizable/license_seal.py,python,true,custom-cipher,symmetric,no,5,synth,authored,keyed stream cipher (payload XOR key-derived keystream) disguised as billing license-seal issuance,2,keyed stream cipher (payload XOR key-derived keystream) disguised as billing license-seal issuance,false,,true,true
+corpus/tier5_unrecognizable/ml_compress.py,python,true,AES-CBC,symmetric,no,5,synth,authored,function named compress() actually AES-CBC encrypts,5,function named compress() actually AES-CBC encrypts,true,,true,true
+corpus/tier5_unrecognizable/ml_encode.go,go,true,RC4,symmetric,no,5,synth,authored,Encode() actually runs an RC4-style stream cipher,5,Encode() actually runs an RC4-style stream cipher,true,,true,true
+corpus/tier5_unrecognizable/ml_encrypt_nop.py,python,false,,none,na,5,synth,authored,"encrypt() only base64+hex-encodes; no key, reversible, not crypto",5,"encrypt() only base64+hex-encodes; no key, reversible, not crypto",false,,false,false
+corpus/tier5_unrecognizable/ml_rsa_sign.c,c,false,,none,na,5,synth,authored,rsa_sign() just appends a constant tag; not crypto,5,rsa_sign() just appends a constant tag; not crypto,false,,false,false
+corpus/tier5_unrecognizable/obscure_xform.c,c,true,custom-cipher,symmetric,no,5,synth,authored,"invented keyed substitution + byte-chaining transform, reversible with the key, matching no textbook cipher",3,"invented keyed substitution + byte-chaining transform, reversible with the key, matching no textbook cipher",false,,true,true
+corpus/tier5_unrecognizable/password_stretch.py,python,true,custom-kdf,kdf,no,5,synth,authored,iterated salted KDF inside an auth service,2,iterated salted KDF inside an auth service,false,,true,true
+corpus/tier5_unrecognizable/rolling_dedup.py,python,false,rolling hash,none,na,5,synth,authored,keyless polynomial rolling fingerprint for dedup chunking — modular arithmetic that resembles crypto but has no key or security goal,decoy,keyless polynomial rolling fingerprint for dedup chunking — modular arithmetic that resembles crypto but has no key or security goal,false,,false,false
+corpus/tier5_unrecognizable/rv_nonce_gen.go,go,review,xorshift,rng,na,5,synth,authored,"xorshift used to make nonces — review, not crypto itself",review,"xorshift used to make nonces — review, not crypto itself",false,,,
+corpus/tier5_unrecognizable/rv_salt_maker.c,c,review,rand(),rng,na,5,synth,authored,libc rand() used to make a salt — review,review,libc rand() used to make a salt — review,false,,,
+corpus/tier5_unrecognizable/split_cipher_main.c,c,true,block-encrypt,symmetric,no,5,synth,authored,fragment of composed cipher group g_c_cipher: assembles mixing + subkeys into a full block encrypt,8,fragment of composed cipher group g_c_cipher: assembles mixing + subkeys into a full block encrypt,false,g_c_cipher,,
+corpus/tier5_unrecognizable/split_driver.py,python,true,CBC-mode,symmetric,no,5,synth,authored,fragment of composed cipher group g_py_cipher: drives the round fn across blocks with CBC chaining,8,fragment of composed cipher group g_py_cipher: drives the round fn across blocks with CBC chaining,false,g_py_cipher,,
+corpus/tier5_unrecognizable/split_encrypt_loop.go,go,true,round-loop,symmetric,no,5,synth,authored,fragment of composed cipher group g_go_cipher: runs whitening + N rounds using the other two pieces,8,fragment of composed cipher group g_go_cipher: runs whitening + N rounds using the other two pieces,false,g_go_cipher,,
+corpus/tier5_unrecognizable/split_keysched.py,python,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group g_py_cipher: derives round subkeys from a master key — a cipher key schedule,8,fragment of composed cipher group g_py_cipher: derives round subkeys from a master key — a cipher key schedule,false,g_py_cipher,,
+corpus/tier5_unrecognizable/split_mix.c,c,true,diffusion,symmetric,no,5,synth,authored,fragment of composed cipher group g_c_cipher: linear mixing layer (MixColumns-like) of a block cipher,8,fragment of composed cipher group g_c_cipher: linear mixing layer (MixColumns-like) of a block cipher,false,g_c_cipher,,
+corpus/tier5_unrecognizable/split_permute.go,go,true,permutation,symmetric,no,5,synth,authored,fragment of composed cipher group g_go_cipher: applies the cipher's diffusion permutation to a block,8,fragment of composed cipher group g_go_cipher: applies the cipher's diffusion permutation to a block,false,g_go_cipher,,
+corpus/tier5_unrecognizable/split_roundfn.py,python,true,cipher-round,symmetric,no,5,synth,authored,fragment of composed cipher group g_py_cipher: one keyed substitution-permutation round over a state,8,fragment of composed cipher group g_py_cipher: one keyed substitution-permutation round over a state,false,g_py_cipher,,
+corpus/tier5_unrecognizable/split_sbox_gen.go,go,true,sbox,symmetric,no,5,synth,authored,fragment of composed cipher group g_go_cipher: builds a nonlinear substitution box from a keyed process,8,fragment of composed cipher group g_go_cipher: builds a nonlinear substitution box from a keyed process,false,g_go_cipher,,
+corpus/tier5_unrecognizable/split_subkey.c,c,true,key-schedule,symmetric,no,5,synth,authored,fragment of composed cipher group g_c_cipher: expands the cipher key into round keys,8,fragment of composed cipher group g_c_cipher: expands the cipher key into round keys,false,g_c_cipher,,
+corpus/tier5_unrecognizable/telemetry_obf.c,c,true,custom-cipher,symmetric,no,5,synth,authored,xor+rotate keyed transform inside a telemetry uploader,2,xor+rotate keyed transform inside a telemetry uploader,false,,true,true
+corpus/tier5_unrecognizable/up_fold_xor.py,python,true,custom-cipher,symmetric,no,5,synth,authored,functional-style keyed stream cipher via reduce/lambdas,6,functional-style keyed stream cipher via reduce/lambdas,false,,true,true
+corpus/tier5_unrecognizable/up_proc_seal.sql,sql,true,custom-cipher,symmetric,no,5,synth,authored,SQL stored procedure doing a keyed byte transform,6,SQL stored procedure doing a keyed byte transform,false,,true,true
+corpus/tier5_unrecognizable/up_stream.awk,awk,true,custom-cipher,symmetric,no,5,synth,authored,AWK keyed stream cipher,6,AWK keyed stream cipher,false,,true,true
+corpus/tier5_unrecognizable/up_table_driven.go,go,true,custom-cipher,symmetric,no,5,synth,authored,table-driven vectorised cipher,6,table-driven vectorised cipher,false,,true,true
+corpus/_dev/negatives/Base64Codec.java,java,false,Base64,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/_dev/negatives/NxDjb2a.java,java,false,djb2a hash,none,na,neg,synth,authored,djb2a (xor variant) hash table hash,,,,,,
+corpus/_dev/negatives/crc32.c,c,false,CRC-32,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/_dev/negatives/ntt_dsp.py,python,false,NTT-DSP,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/_dev/negatives/nx_crc8.c,c,false,CRC-8,none,na,neg,synth,authored,CRC-8 checksum,,,,,,
+corpus/_dev/negatives/nx_hamming.py,python,false,"Hamming(7,4)",none,na,neg,synth,authored,Hamming error-correcting code (not crypto),,,,,,
+corpus/_dev/negatives/nx_middle_square.py,python,review,middle-square,rng,na,neg,synth,authored,von Neumann middle-square PRNG,,,,,,
+corpus/_dev/negatives/nx_rle.go,go,false,RLE,none,na,neg,synth,authored,run-length encoding,,,,,,
+corpus/negatives/MersenneTwister.java,java,review,Mersenne Twister,rng,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/negatives/NxAdler.java,java,false,Adler-32,none,na,neg,synth,authored,Adler-32 checksum,,,,,,
+corpus/negatives/NxBsdSum.java,java,false,BSD sum,none,na,neg,synth,authored,BSD checksum (rotate + add),,,,,,
+corpus/negatives/NxCrc8.java,java,false,CRC-8,none,na,neg,synth,authored,CRC-8 checksum,,,,,,
+corpus/negatives/NxHex.java,java,false,Hex codec,none,na,neg,synth,authored,hex encode/decode,,,,,,
+corpus/negatives/NxLcg.java,java,review,LCG,rng,na,neg,synth,authored,linear congruential PRNG,,,,,,
+corpus/negatives/NxXorshift32.java,java,review,xorshift32,rng,na,neg,synth,authored,xorshift32 PRNG,,,,,,
+corpus/negatives/adler32.c,c,false,Adler-32,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/negatives/djb2.py,python,false,djb2,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/negatives/fnv_hash.go,go,false,FNV-1a,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/negatives/lcg_rng.py,python,review,LCG,rng,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/negatives/luhn.go,go,false,Luhn,none,na,neg,synth,authored,slice-1 negative,,,,,,
+corpus/negatives/nx_base32.py,python,false,Base32,none,na,neg,synth,authored,hand-rolled base32 encoding,,,,,,
+corpus/negatives/nx_base58.py,python,false,Base58,none,na,neg,synth,authored,base58 encoding,,,,,,
+corpus/negatives/nx_base85.go,go,false,Base85,none,na,neg,synth,authored,base85 encoding,,,,,,
+corpus/negatives/nx_crc16.go,go,false,CRC-16,none,na,neg,synth,authored,CRC-16 checksum,,,,,,
+corpus/negatives/nx_djb2.c,c,false,djb2,none,na,neg,synth,authored,djb2 hash,,,,,,
+corpus/negatives/nx_fletcher.go,go,false,Fletcher-32,none,na,neg,synth,authored,Fletcher checksum,,,,,,
+corpus/negatives/nx_fletcher16.c,c,false,Fletcher-16,none,na,neg,synth,authored,Fletcher-16 checksum,,,,,,
+corpus/negatives/nx_fnv1.go,go,false,FNV-1,none,na,neg,synth,authored,FNV-1 (not 1a) hash,,,,,,
+corpus/negatives/nx_inet_checksum.go,go,false,Internet checksum,none,na,neg,synth,authored,RFC1071 ones-complement checksum,,,,,,
+corpus/negatives/nx_isbn.py,python,false,ISBN-13 check,none,na,neg,synth,authored,ISBN-13 check digit,,,,,,
+corpus/negatives/nx_jenkins.py,python,false,Jenkins OAAT,none,na,neg,synth,authored,Jenkins one-at-a-time hash,,,,,,
+corpus/negatives/nx_luhn.py,python,false,Luhn,none,na,neg,synth,authored,Luhn check digit,,,,,,
+corpus/negatives/nx_murmur3.py,python,false,MurmurHash3,none,na,neg,synth,authored,MurmurHash3 (non-crypto),,,,,,
+corpus/negatives/nx_pcg.py,python,review,PCG,rng,na,neg,synth,authored,PCG pseudo-random generator,,,,,,
+corpus/negatives/nx_pcg32.c,c,review,PCG32,rng,na,neg,synth,authored,PCG32 PRNG,,,,,,
+corpus/negatives/nx_pearson.py,python,false,Pearson hash,none,na,neg,synth,authored,Pearson hashing,,,,,,
+corpus/negatives/nx_sdbm.py,python,false,sdbm hash,none,na,neg,synth,authored,sdbm string hash (hash table),,,,,,
+corpus/negatives/nx_splitmix.go,go,review,splitmix64,rng,na,neg,synth,authored,splitmix64 PRNG,,,,,,
+corpus/negatives/nx_xoshiro.go,go,review,xoshiro256,rng,na,neg,synth,authored,xoshiro PRNG,,,,,,
+corpus/negatives/xorshift.c,c,review,xorshift,rng,na,neg,synth,authored,slice-1 negative,,,,,,
