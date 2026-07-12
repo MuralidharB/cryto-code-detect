@@ -1,6 +1,14 @@
-# crypto-discovery-bench
+<h1 align="center">🔎 crypto-discovery-bench</h1>
 
-**Find the cryptography hiding in your source code — even when it doesn't call a crypto library.**
+<p align="center"><b>Find the cryptography hiding in your source code — even when it doesn't call a crypto library.</b></p>
+
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg">
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12%2B-blue.svg">
+  <img alt="LLM: Claude" src="https://img.shields.io/badge/detection-LLM%20semantic-8A2BE2.svg">
+  <img alt="catches hand-rolled crypto" src="https://img.shields.io/badge/catches-hand--rolled%20crypto-brightgreen.svg">
+  <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+</p>
 
 An open-source toolkit for discovering embedded cryptography in a codebase: RSA, AES, hashes, MACs,
 key exchange — including the **hand-rolled, library-less, obfuscated, or business-logic-fused** crypto
@@ -9,6 +17,30 @@ your own code, and a rigorous benchmark that proves the detection actually works
 
 Useful when you need a real cryptographic inventory: **post-quantum migration** (find everything
 Shor-breakable), security review, or generating a CBOM for compliance.
+
+## Install
+
+```bash
+git clone https://github.com/MuralidharB/cryto-code-detect && cd cryto-code-detect && pip install -r requirements.txt
+```
+
+## Quick example
+
+```console
+$ export ANTHROPIC_API_KEY=sk-...
+$ python run.py --detector llm --corpus ./src
+[run] llm over ./src -> results/llm.jsonl
+[done] llm: 3 findings
+
+$ cat results/llm.jsonl
+{"filepath":"src/util/pack.go","is_crypto":false,"primary_algorithm":null,"evidence":"length-prefix framing, no key — serialization, not crypto","confidence":0.95}
+{"filepath":"src/auth/seal.py","is_crypto":true,"primary_algorithm":"custom-stream-cipher","family":"symmetric","quantum_vulnerable":"no","evidence":"payload XORed with a key-derived keystream — homegrown cipher, no library import","confidence":0.9}
+{"filepath":"src/billing/license.py","is_crypto":true,"primary_algorithm":"RSA","family":"asymmetric","quantum_vulnerable":"yes","evidence":"modular exponentiation pow(m, e, n) — textbook RSA, no library","confidence":0.97}
+```
+
+A signature/library scanner flags **none** of these — there are no crypto imports. The LLM catches the
+homegrown stream cipher and the library-less RSA from what the code *does*, and marks the RSA
+`quantum_vulnerable` for your migration list.
 
 ---
 
