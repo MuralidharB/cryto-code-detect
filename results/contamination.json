@@ -5,8 +5,8 @@
       "n": 23
     },
     "synth": {
-      "recall": 0.9875776397515528,
-      "n": 161
+      "recall": 0.9563106796116505,
+      "n": 206
     },
     "novel": {
       "recall": 1.0,
@@ -28,25 +28,25 @@
   "reading": "public and novel comparable at matched difficulty \u2014 low contamination",
   "detector": "llm",
   "memorisation_canary_overlap": {
-    "corpus/tier0_library_idiomatic/Md4Bouncy.java": 0.29,
-    "corpus/tier0_library_idiomatic/aes_gcm_examples.go": 0.01,
-    "corpus/tier0_library_idiomatic/md4_xcrypto.go": 0.671,
-    "corpus/tier0_library_idiomatic/sha1_hashlib.py": 0.105,
-    "corpus/tier0_library_idiomatic/sha1_openssl.c": 0.022,
-    "corpus/tier0_library_idiomatic/sha256_stdlib.go": 0.41,
-    "corpus/tier2_handrolled_textbook/RsaTextbook.java": 0.02,
-    "corpus/tier2_handrolled_textbook/Sha1Scratch.java": 0.099,
+    "corpus/tier0_library_idiomatic/Md4Bouncy.java": 0.235,
+    "corpus/tier0_library_idiomatic/aes_gcm_examples.go": 0.017,
+    "corpus/tier0_library_idiomatic/md4_xcrypto.go": 0.676,
+    "corpus/tier0_library_idiomatic/sha1_hashlib.py": 0.095,
+    "corpus/tier0_library_idiomatic/sha1_openssl.c": 0.078,
+    "corpus/tier0_library_idiomatic/sha256_stdlib.go": 0.382,
+    "corpus/tier2_handrolled_textbook/RsaTextbook.java": 0.019,
+    "corpus/tier2_handrolled_textbook/Sha1Scratch.java": 0.07,
     "corpus/tier2_handrolled_textbook/Sha256Scratch.java": 0.173,
-    "corpus/tier2_handrolled_textbook/aes_bcon.c": 0.03,
-    "corpus/tier2_handrolled_textbook/blowfish_bcon.c": 0.062,
-    "corpus/tier2_handrolled_textbook/des_bcon.c": 0.07,
-    "corpus/tier2_handrolled_textbook/md2_bcon.c": 0.247,
-    "corpus/tier2_handrolled_textbook/md4_scratch.c": 0.032,
-    "corpus/tier2_handrolled_textbook/md5_bcon.c": 0.23,
-    "corpus/tier2_handrolled_textbook/md5_scratch.go": 0.04,
+    "corpus/tier2_handrolled_textbook/aes_bcon.c": 0.039,
+    "corpus/tier2_handrolled_textbook/blowfish_bcon.c": 0.077,
+    "corpus/tier2_handrolled_textbook/des_bcon.c": 0.1,
+    "corpus/tier2_handrolled_textbook/md2_bcon.c": 0.246,
+    "corpus/tier2_handrolled_textbook/md4_scratch.c": 0.033,
+    "corpus/tier2_handrolled_textbook/md5_bcon.c": 0.231,
+    "corpus/tier2_handrolled_textbook/md5_scratch.go": 0.023,
     "corpus/tier2_handrolled_textbook/md5_scratch.py": 0.229,
-    "corpus/tier2_handrolled_textbook/rc4_bcon.c": 0.594,
+    "corpus/tier2_handrolled_textbook/rc4_bcon.c": 0.512,
     "corpus/tier2_handrolled_textbook/rsa_textbook.c": 0.008,
-    "corpus/tier2_handrolled_textbook/rsa_textbook.go": 0.034
+    "corpus/tier2_handrolled_textbook/rsa_textbook.go": 0.03
   }
 }

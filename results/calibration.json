@@ -1,7 +1,7 @@
 {
   "llm": {
     "n_scored": 363,
-    "ece": 0.0288,
+    "ece": 0.0297,
     "mce": 0.62,
     "bins": [
       {
@@ -47,15 +47,15 @@
       {
         "lo": 0.5,
         "hi": 0.6,
-        "n": 0,
-        "mean_conf": null,
-        "accuracy": null,
-        "gap": null
+        "n": 1,
+        "mean_conf": 0.55,
+        "accuracy": 0.0,
+        "gap": 0.55
       },
       {
         "lo": 0.6,
         "hi": 0.7,
-        "n": 1,
+        "n": 2,
         "mean_conf": 0.62,
         "accuracy": 0.0,
         "gap": 0.62
@@ -63,49 +63,49 @@
       {
         "lo": 0.7,
         "hi": 0.8,
-        "n": 14,
-        "mean_conf": 0.722,
-        "accuracy": 0.714,
-        "gap": 0.008
+        "n": 11,
+        "mean_conf": 0.723,
+        "accuracy": 0.727,
+        "gap": 0.005
       },
       {
         "lo": 0.8,
         "hi": 0.9,
-        "n": 38,
-        "mean_conf": 0.836,
-        "accuracy": 0.947,
-        "gap": 0.112
+        "n": 42,
+        "mean_conf": 0.84,
+        "accuracy": 0.929,
+        "gap": 0.089
       },
       {
         "lo": 0.9,
         "hi": 1.0,
-        "n": 310,
-        "mean_conf": 0.979,
+        "n": 307,
+        "mean_conf": 0.98,
         "accuracy": 0.997,
-        "gap": 0.018
+        "gap": 0.017
       }
     ],
     "positive_flags": {
-      "n_positive_flags": 310,
+      "n_positive_flags": 308,
       "target_precision": 0.98,
       "trust_threshold": 0.72,
       "by_conf": [
         {
           "lo": 0.7,
           "hi": 0.8,
-          "n": 10,
+          "n": 8,
           "precision": 1.0
         },
         {
           "lo": 0.8,
           "hi": 0.9,
-          "n": 35,
+          "n": 39,
           "precision": 1.0
         },
         {
           "lo": 0.9,
           "hi": 1.0,
-          "n": 265,
+          "n": 261,
           "precision": 0.996
         }
       ]
@@ -114,8 +114,8 @@
   },
   "hybrid": {
     "n_scored": 363,
-    "ece": 0.0341,
-    "mce": 0.42,
+    "ece": 0.0385,
+    "mce": 0.62,
     "bins": [
       {
         "lo": 0.0,
@@ -160,55 +160,49 @@
       {
         "lo": 0.5,
         "hi": 0.6,
-        "n": 0,
-        "mean_conf": null,
-        "accuracy": null,
-        "gap": null
+        "n": 1,
+        "mean_conf": 0.55,
+        "accuracy": 0.0,
+        "gap": 0.55
       },
       {
         "lo": 0.6,
         "hi": 0.7,
-        "n": 5,
+        "n": 1,
         "mean_conf": 0.62,
-        "accuracy": 0.2,
-        "gap": 0.42
+        "accuracy": 0.0,
+        "gap": 0.62
       },
       {
         "lo": 0.7,
         "hi": 0.8,
-        "n": 10,
-        "mean_conf": 0.735,
-        "accuracy": 0.7,
-        "gap": 0.035
+        "n": 12,
+        "mean_conf": 0.723,
+        "accuracy": 0.583,
+        "gap": 0.139
       },
       {
         "lo": 0.8,
         "hi": 0.9,
-        "n": 39,
-        "mean_conf": 0.835,
-        "accuracy": 0.923,
-        "gap": 0.088
+        "n": 44,
+        "mean_conf": 0.838,
+        "accuracy": 0.977,
+        "gap": 0.139
       },
       {
         "lo": 0.9,
         "hi": 1.0,
-        "n": 309,
-        "mean_conf": 0.979,
-        "accuracy": 1.0,
-        "gap": 0.021
+        "n": 305,
+        "mean_conf": 0.98,
+        "accuracy": 0.997,
+        "gap": 0.016
       }
     ],
     "positive_flags": {
-      "n_positive_flags": 308,
+      "n_positive_flags": 309,
       "target_precision": 0.98,
-      "trust_threshold": 0.62,
+      "trust_threshold": 0.72,
       "by_conf": [
-        {
-          "lo": 0.6,
-          "hi": 0.7,
-          "n": 1,
-          "precision": 1.0
-        },
         {
           "lo": 0.7,
           "hi": 0.8,
@@ -218,14 +212,14 @@
         {
           "lo": 0.8,
           "hi": 0.9,
-          "n": 36,
-          "precision": 0.972
+          "n": 42,
+          "precision": 1.0
         },
         {
           "lo": 0.9,
           "hi": 1.0,
-          "n": 264,
-          "precision": 1.0
+          "n": 260,
+          "precision": 0.996
         }
       ]
     },

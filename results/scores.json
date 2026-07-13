@@ -33,7 +33,7 @@
         "f1": 0.8732394366197184,
         "n": 40,
         "recall_ci95": [
-          0.65,
+          0.625,
           0.9
         ]
       },
@@ -111,7 +111,7 @@
         "n": 87,
         "recall_ci95": [
           0.034,
-          0.161
+          0.149
         ]
       },
       "public": {
@@ -137,7 +137,7 @@
         "n": 253,
         "recall_ci95": [
           0.233,
-          0.354
+          0.359
         ]
       }
     },
@@ -203,208 +203,6 @@
   },
   "llm": {
     "detector": "llm",
-    "overall": {
-      "tp": 309,
-      "fp": 1,
-      "fn": 7,
-      "precision": 0.9967741935483871,
-      "recall": 0.9778481012658228,
-      "f1": 0.9872204472843451,
-      "n": 363
-    },
-    "by_tier": {
-      "0": {
-        "tp": 40,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 40,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "1": {
-        "tp": 40,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 40,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "2": {
-        "tp": 40,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 40,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "3": {
-        "tp": 40,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 40,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "4": {
-        "tp": 41,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 41,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "5": {
-        "tp": 108,
-        "fp": 1,
-        "fn": 7,
-        "precision": 0.9908256880733946,
-        "recall": 0.9391304347826087,
-        "f1": 0.9642857142857143,
-        "n": 132,
-        "recall_ci95": [
-          0.896,
-          0.983
-        ]
-      },
-      "neg": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 0,
-        "precision": null,
-        "recall": null,
-        "f1": null,
-        "n": 30,
-        "recall_ci95": null
-      }
-    },
-    "by_split": {
-      "novel": {
-        "tp": 87,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 87,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "public": {
-        "tp": 23,
-        "fp": 0,
-        "fn": 0,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "n": 23,
-        "recall_ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "synth": {
-        "tp": 199,
-        "fp": 1,
-        "fn": 7,
-        "precision": 0.995,
-        "recall": 0.9660194174757282,
-        "f1": 0.9802955665024631,
-        "n": 253,
-        "recall_ci95": [
-          0.937,
-          0.99
-        ]
-      }
-    },
-    "crypto_adjacent_review": {
-      "n": 14,
-      "flagged": 13,
-      "surfaced_rate": 0.9285714285714286
-    },
-    "not_covered": 0,
-    "coverage": 1.0,
-    "files_missing_from_findings": [],
-    "tier5": {
-      "is_crypto_recall": 0.9391304347826087,
-      "n_positive": 115,
-      "family_accuracy": 0.9907407407407407,
-      "algorithm_accuracy_recognizable": 0.9,
-      "n_recognizable": 20,
-      "by_subclass_recall": {
-        "1": {
-          "recall": 1.0,
-          "n": 8
-        },
-        "2": {
-          "recall": 0.9473684210526315,
-          "n": 19
-        },
-        "3": {
-          "recall": 1.0,
-          "n": 13
-        },
-        "4": {
-          "recall": 1.0,
-          "n": 8
-        },
-        "5": {
-          "recall": 1.0,
-          "n": 4
-        },
-        "6": {
-          "recall": 1.0,
-          "n": 7
-        },
-        "7": {
-          "recall": 1.0,
-          "n": 8
-        },
-        "8": {
-          "recall": 0.875,
-          "n": 48
-        }
-      },
-      "decoys": {
-        "n": 13,
-        "false_positives": 1,
-        "precision_fp_rate": 0.07692307692307693
-      },
-      "compose_groups": {
-        "n_groups": 12,
-        "file_level_recall": 0.875,
-        "group_level_recall": 1.0
-      }
-    }
-  },
-  "hybrid": {
-    "detector": "hybrid",
     "overall": {
       "tp": 307,
       "fp": 1,
@@ -547,8 +345,8 @@
     },
     "crypto_adjacent_review": {
       "n": 14,
-      "flagged": 13,
-      "surfaced_rate": 0.9285714285714286
+      "flagged": 14,
+      "surfaced_rate": 1.0
     },
     "not_covered": 0,
     "coverage": 1.0,
@@ -605,76 +403,205 @@
       }
     }
   },
-  "sonar": {
-    "detector": "sonar",
+  "hybrid": {
+    "detector": "hybrid",
     "overall": {
-      "tp": 0,
-      "fp": 0,
-      "fn": 0,
-      "precision": null,
-      "recall": null,
-      "f1": null,
-      "n": 0
+      "tp": 308,
+      "fp": 1,
+      "fn": 8,
+      "precision": 0.9967637540453075,
+      "recall": 0.9746835443037974,
+      "f1": 0.9855999999999999,
+      "n": 363
     },
-    "by_tier": {},
-    "by_split": {},
+    "by_tier": {
+      "0": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "1": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "2": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "3": {
+        "tp": 40,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 40,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "4": {
+        "tp": 41,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 41,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "5": {
+        "tp": 107,
+        "fp": 1,
+        "fn": 8,
+        "precision": 0.9907407407407407,
+        "recall": 0.9304347826086956,
+        "f1": 0.9596412556053812,
+        "n": 132,
+        "recall_ci95": [
+          0.887,
+          0.974
+        ]
+      },
+      "neg": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "n": 30,
+        "recall_ci95": null
+      }
+    },
+    "by_split": {
+      "novel": {
+        "tp": 87,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 87,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "public": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "n": 23,
+        "recall_ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "synth": {
+        "tp": 198,
+        "fp": 1,
+        "fn": 8,
+        "precision": 0.9949748743718593,
+        "recall": 0.9611650485436893,
+        "f1": 0.9777777777777776,
+        "n": 253,
+        "recall_ci95": [
+          0.932,
+          0.985
+        ]
+      }
+    },
     "crypto_adjacent_review": {
-      "n": 0,
-      "flagged": 0,
-      "surfaced_rate": null
+      "n": 14,
+      "flagged": 14,
+      "surfaced_rate": 1.0
     },
-    "not_covered": 377,
-    "coverage": 0.0,
+    "not_covered": 0,
+    "coverage": 1.0,
     "files_missing_from_findings": [],
     "tier5": {
-      "is_crypto_recall": 0.0,
+      "is_crypto_recall": 0.9304347826086956,
       "n_positive": 115,
-      "family_accuracy": null,
-      "algorithm_accuracy_recognizable": null,
-      "n_recognizable": 0,
+      "family_accuracy": 0.9906542056074766,
+      "algorithm_accuracy_recognizable": 0.9,
+      "n_recognizable": 20,
       "by_subclass_recall": {
         "1": {
-          "recall": 0.0,
+          "recall": 1.0,
           "n": 8
         },
         "2": {
-          "recall": 0.0,
+          "recall": 0.9473684210526315,
           "n": 19
         },
         "3": {
-          "recall": 0.0,
+          "recall": 1.0,
           "n": 13
         },
         "4": {
-          "recall": 0.0,
+          "recall": 1.0,
           "n": 8
         },
         "5": {
-          "recall": 0.0,
+          "recall": 1.0,
           "n": 4
         },
         "6": {
-          "recall": 0.0,
+          "recall": 0.8571428571428571,
           "n": 7
         },
         "7": {
-          "recall": 0.0,
+          "recall": 1.0,
           "n": 8
         },
         "8": {
-          "recall": 0.0,
+          "recall": 0.875,
           "n": 48
         }
       },
       "decoys": {
         "n": 13,
-        "false_positives": 0,
-        "precision_fp_rate": 0.0
+        "false_positives": 1,
+        "precision_fp_rate": 0.07692307692307693
       },
       "compose_groups": {
         "n_groups": 12,
-        "file_level_recall": 0.0,
-        "group_level_recall": 0.0
+        "file_level_recall": 0.875,
+        "group_level_recall": 1.0
       }
     }
   }

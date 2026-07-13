@@ -12,9 +12,9 @@ Tier 5 was built to drive LLM recall below 100% and locate the failure boundary.
 |---|---|---|---|---|
 | 1 (base) | 8 subclasses + decoys | 0.97 | 0.92 | 1.00 |
 | 2 (deeper) | deep business-logic fusion (#2) + finer splits (#8) | 0.96 | 0.89 | 1.00 |
-| 3 (finer) | ciphers split into isolated sub/perm/mix fragments | 0.94 | 0.88 | 1.00 |
+| 3 (finer) | ciphers split into isolated sub/perm/mix fragments | 0.92 | 0.85 | 1.00 |
 
-**Converged conclusion.** Recall fell monotonically (0.97 → 0.96 → 0.94), and every incremental miss is a **cryptographic primitive isolated below the level where a single file carries intent** — specifically a bare substitution-table (S-box / inverse-S-box) builder, which is indistinguishable from any lookup table without its cipher. The LLM was **not** fooled by unfamiliar/homegrown constructions, runtime-computed constants, business-logic fusion, lying function names, subtly-broken variants, or unusual languages (all ≈0.95–1.00). Because **group-level recall stays 1.00** (every split cipher is caught by at least one of its fragments), the product implication is precise: per-file scanning has a floor at fragmented ciphers, but repo/group-aware scanning closes it. Pushing recall lower would require naked S-box files with no group — which correctly fail the two-labeler agreement gate as genuinely ambiguous and land in _adjudication, not the scored set. This is the real per-file floor for confidently-labelable fixtures.
+**Converged conclusion.** Recall fell monotonically (0.97 → 0.96 → 0.92), and every incremental miss is a **cryptographic primitive isolated below the level where a single file carries intent** — specifically a bare substitution-table (S-box / inverse-S-box) builder, which is indistinguishable from any lookup table without its cipher. The LLM was **not** fooled by unfamiliar/homegrown constructions, runtime-computed constants, business-logic fusion, lying function names, subtly-broken variants, or unusual languages (all ≈0.95–1.00). Because **group-level recall stays 1.00** (every split cipher is caught by at least one of its fragments), the product implication is precise: per-file scanning has a floor at fragmented ciphers, but repo/group-aware scanning closes it. Pushing recall lower would require naked S-box files with no group — which correctly fail the two-labeler agreement gate as genuinely ambiguous and land in _adjudication, not the scored set. This is the real per-file floor for confidently-labelable fixtures.
 
 ## Miss rate by tier (the wedge)
 
@@ -27,15 +27,15 @@ Recall = fraction of crypto caught; miss = 1 − recall. The thesis: signatures 
 | 2 | hand-rolled textbook | 0.25 | 1.00 | 1.00 | 75% | 0% | 0% |
 | 3 | hand-rolled obfuscated | 0.12 | 1.00 | 1.00 | 88% | 0% | 0% |
 | 4 | hand-rolled, library-less | 0.00 | 1.00 | 1.00 | 100% | 0% | 0% |
-| 5 | unrecognizable (tier 5) | 0.00 | 0.94 | 0.92 | 100% | 6% | 8% |
+| 5 | unrecognizable (tier 5) | 0.00 | 0.92 | 0.93 | 100% | 8% | 7% |
 
 ## Precision & F1 (the honest other half)
 
 | detector | precision | recall | F1 | false positives on negatives |
 |---|---|---|---|---|
 | regex | 1.00 | 0.25 | 0.40 | 0 |
-| llm | 1.00 | 0.98 | 0.99 | 0 |
-| hybrid | 1.00 | 0.97 | 0.98 | 0 |
+| llm | 1.00 | 0.97 | 0.98 | 0 |
+| hybrid | 1.00 | 0.97 | 0.99 | 0 |
 
 ## crypto_adjacent_review (PRNGs — reported, not scored)
 
@@ -43,7 +43,7 @@ PRNGs are excluded from binary precision/recall; a posture tool may legitimately
 
 | detector | regex | llm | hybrid |
 |---|---|---|---|
-| surfaced | 0/14 | 13/14 | 13/14 |
+| surfaced | 0/14 | 14/14 | 14/14 |
 
 ## Tier 5 — unrecognizable crypto (the failure-boundary tier)
 
@@ -52,8 +52,8 @@ Three numbers that diverge by design: is_crypto recall (did it spot crypto at al
 | detector | is_crypto recall | family acc | algo acc (reco) | decoy FP rate | file-lvl | group-lvl |
 |---|---|---|---|---|---|---|
 | regex | 0.00 (n=115) | — | — | 0.00 (0/13) | 0.00 | 0.00 |
-| llm | 0.94 (n=115) | 0.99 | 0.90 | 0.08 (1/13) | 0.88 | 1.00 |
-| hybrid | 0.92 (n=115) | 0.99 | 0.90 | 0.08 (1/13) | 0.85 | 1.00 |
+| llm | 0.92 (n=115) | 0.99 | 0.90 | 0.08 (1/13) | 0.85 | 1.00 |
+| hybrid | 0.93 (n=115) | 0.99 | 0.90 | 0.08 (1/13) | 0.88 | 1.00 |
 
 **llm is_crypto recall by subclass** (which forms break detection):
 
@@ -64,20 +64,21 @@ Three numbers that diverge by design: is_crypto recall (did it spot crypto at al
 | 3 | 1.00 | 13 |
 | 4 | 1.00 | 8 |
 | 5 | 1.00 | 4 |
-| 6 | 1.00 | 7 |
+| 6 | 0.86 | 7 |
 | 7 | 1.00 | 8 |
-| 8 | 0.88 | 48 |
+| 8 | 0.85 | 48 |
 
 ## Confidence calibration (LLM)
 
-Is reported confidence trustworthy? **ECE 0.0288** (well-calibrated); accuracy ≈ mean-confidence per bucket ⇒ the confidence can gate the hybrid's trust/verify.
+Is reported confidence trustworthy? **ECE 0.0297** (well-calibrated); accuracy ≈ mean-confidence per bucket ⇒ the confidence can gate the hybrid's trust/verify.
 
 | confidence bin | n | mean conf | empirical accuracy | gap |
 |---|---|---|---|---|
-| [0.6, 0.7) | 1 | 0.62 | 0.00 | 0.620 |
-| [0.7, 0.8) | 14 | 0.72 | 0.71 | 0.008 |
-| [0.8, 0.9) | 38 | 0.84 | 0.95 | 0.112 |
-| [0.9, 1.0) | 310 | 0.98 | 1.00 | 0.018 |
+| [0.5, 0.6) | 1 | 0.55 | 0.00 | 0.550 |
+| [0.6, 0.7) | 2 | 0.62 | 0.00 | 0.620 |
+| [0.7, 0.8) | 11 | 0.72 | 0.73 | 0.005 |
+| [0.8, 0.9) | 42 | 0.84 | 0.93 | 0.089 |
+| [0.9, 1.0) | 307 | 0.98 | 1.00 | 0.017 |
 
 - **Trust threshold:** is_crypto=true flags reach ≥0.98 precision at **confidence ≥ 0.72** — the hybrid can auto-trust above it and deterministically verify below it.
 
@@ -90,7 +91,7 @@ Is reported confidence trustworthy? **ECE 0.0288** (well-calibrated); accuracy �
 |---|---|---|---|
 | 2 | 1.00 (17) | 1.00 (23) | +0.000 |
 
-- **Memorisation canary**: mean verbatim overlap 0.17, max 0.67 over 20 public fixtures (>~0.6 suggests the exact file is memorised).
+- **Memorisation canary**: mean verbatim overlap 0.16, max 0.68 over 20 public fixtures (>~0.6 suggests the exact file is memorised).
 
 ## Corpus composition
 

@@ -4,7 +4,7 @@ import "encoding/hex"
 
 // Derives a storage key for a content-addressable blob cache. Identical
 // payloads map to the same key so duplicate uploads collapse to one
-// object. A fast non-crypto mixing function keeps ingest cheap.
+// object. A fast mixing function keeps ingest cheap.
 
 func mixKey(data []byte) [16]byte {
 	var h1 uint64 = 0x9e3779b97f4a7c15

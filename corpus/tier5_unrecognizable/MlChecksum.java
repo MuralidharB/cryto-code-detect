@@ -2,7 +2,7 @@ public class MlChecksum {
 
     private static final int BLOCK = 64;
 
-    // Opaque compression-style digest over a 64-byte block, chained.
+    // Opaque compression-style fold over a 64-byte block, chained.
     private static byte[] innerHash(byte[] data) {
         int[] h = {0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476};
         int padded = ((data.length + BLOCK) / BLOCK) * BLOCK;
